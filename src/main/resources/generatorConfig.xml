@@ -29,7 +29,7 @@
                 <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
                 <property name="enableSubPackages" value="false" />
                 <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
-                <property name="immutable" value="true" />
+                <property name="immutable" value="false" />
                 <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
                 <property name="trimStrings" value="true" />
             </javaModelGenerator>
@@ -70,7 +70,7 @@
                enableSelectByExample="false" selectByExampleQueryId="false">
             </table>
 
-            <table tableName="systemRole" enableCountByExample="false"
+            <table tableName="SystemRole" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             </table>
