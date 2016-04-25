@@ -1,8 +1,6 @@
 package com.lyp360.service.impl;
 
 
-import com.lyp360.dao.SystemuserMapper;
-import com.lyp360.entity.Systemuser;
 import com.lyp360.service.ISystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
