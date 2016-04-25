@@ -43,17 +43,20 @@
 <body>
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-12 text-center">
+                <h1>乐优品科技</h1>
+            </div>
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">请登录</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" action="/login" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="请输入登录名" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="请输入登录名" name="username" type="text" autofocus>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="请输入密码" name="password" type="password" value="">
