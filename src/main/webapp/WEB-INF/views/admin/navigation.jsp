@@ -14,7 +14,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/admin/">乐品科技</a>
+    <a class="navbar-brand" href="/admin/">乐优品科技系统管理</a>
   </div>
   <!-- /.navbar-header -->
 
