@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by GongJunhao on 2016/4/25.
+ * 分页测试
  */
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
