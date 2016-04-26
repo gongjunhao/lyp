@@ -15,7 +15,7 @@
     </bean>
 
     <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="com.platform.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="com.lyp360.shiro.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
@@ -23,7 +23,7 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="com.platform.shiro.realm.UserRealm">
+    <bean id="userRealm" class="com.lyp360.shiro.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <property name="cachingEnabled" value="false"/>
     </bean>
@@ -35,15 +35,7 @@
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="sid"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="-1"/>
-        <property name="domain" value=""/>
-        <property name="path" value="/"/>
-    </bean>
-
-    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="rememberMe"/>
-        <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="2592000"/><!-- 30天 -->
+        <property name="maxAge" value="2592000"/>
         <property name="domain" value=""/>
         <property name="path" value="/"/>
     </bean>
@@ -53,12 +45,15 @@
         <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
         <property name="cipherKey"
                   value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
-        <property name="cookie" ref="rememberMeCookie"/>
+        <property name="cookie" ref="sessionIdCookie"/>
     </bean>
 
-    <bean id="redisShiroSessionDao"  class="com.platform.shiro.session.dao.RedisShiroSessionDao">
-		<property name="cached" ref="redisCached" />
-	</bean>
+    <!-- 会话DAO -->
+    <bean id="sessionDAO"
+          class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
+        <property name="sessionIdGenerator" ref="sessionIdGenerator" />
+    </bean>
 	    <!--
 	定时清理僵尸session，Shiro会启用一个后台守护线程定时执行清理操作
 	用户直接关闭浏览器造成的孤立会话 1800000 milliseconds = 30 mins
@@ -75,7 +70,7 @@
         <property name="deleteInvalidSessions" value="true"/>
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
-        <property name="sessionDAO" ref="redisShiroSessionDao"/>
+        <property name="sessionDAO" ref="sessionDAO"/>
         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
@@ -93,25 +88,10 @@
         <property name="arguments" ref="securityManager"/>
     </bean>
 
-    <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="com.platform.shiro.web.shiro.filter.ServerFormAuthenticationFilter">
-        <property name="usernameParam" value="username"/>
-        <property name="passwordParam" value="password"/>
-        <property name="rememberMeParam" value="rememberMe"/>
-    </bean>
-
-    <bean id="sysUserFilter" class="com.platform.shiro.web.shiro.filter.SysUserFilter"/>
-
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
-        <property name="filters">
-            <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <entry key="sysUser" value-ref="sysUserFilter"/>
-            </util:map>
-        </property>
         <property name="filterChainDefinitions">
             <value>
                 /favicon.ico = anon
@@ -122,7 +102,8 @@
                 /login = authc
                 /logout = logout
                 /authenticated = authc
-                /** = user,sysUser
+                /admin/** = user
+                /** = anon
             </value>
         </property>
     </bean>

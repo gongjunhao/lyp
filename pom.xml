@@ -13,6 +13,7 @@
         <spring-version>4.2.1.RELEASE</spring-version>
         <mybatis-version>3.3.0</mybatis-version>
         <mybatis-spring-version>1.2.3</mybatis-spring-version>
+        <shiro-version>1.2.3</shiro-version>
         <druid-version>1.0.15</druid-version>
         <fastjson-version>1.2.7</fastjson-version>
         <mysql-connection-version>5.1.6</mysql-connection-version>
@@ -37,6 +38,26 @@
             <scope>provided </scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

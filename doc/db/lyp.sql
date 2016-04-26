@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/4/24 21:28:22                           */
+/* Created on:     2016/4/26 23:11:09                           */
 /*==============================================================*/
 
 
@@ -130,6 +130,7 @@ create table SystemUser
    id                   bigint not null comment '主键',
    loginName            varchar(100) comment '登录名',
    nickName             varchar(100) comment '昵称',
+   salt                 varchar(100) comment '散列值',
    passWord             varchar(100) comment '密码',
    status               varchar(20) comment '状态',
    createTime           datetime comment '创建时间',

@@ -36,11 +36,16 @@
             <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
             <sqlMapGenerator targetPackage="${XMLMapperPackage}" targetProject="${targetProject}">
                 <property name="enableSubPackages" value="false" />
-            </sqlMapGenerator>
+            </sqlMapGenerator>EEE
             <javaClientGenerator type="XMLMAPPER" targetPackage="${daoPackage}" targetProject="${targetProject}">
             </javaClientGenerator>
             <!-- table 举例 -->
-            <table tableName="Dictionary" enableCountByExample="false"
+            <table tableName="SystemUser" enableCountByExample="false"
+                   enableUpdateByExample="false" enableDeleteByExample="false"
+                   enableSelectByExample="false" selectByExampleQueryId="false">
+            </table>
+
+            <!--<table tableName="Dictionary" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             </table>
@@ -60,11 +65,6 @@
                enableSelectByExample="false" selectByExampleQueryId="false">
             </table>
 
-            <table tableName="SystemUser" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            </table>
-
             <table tableName="SystemUserRole" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
@@ -73,7 +73,7 @@
             <table tableName="SystemRole" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
-            </table>
+            </table>-->
 
         </context>
     </generatorConfiguration>

@@ -13,4 +13,6 @@ public interface ISystemUserService {
     Systemuser selectByPrimaryKey(Long id);
     int updateByPrimaryKeySelective(Systemuser record);
     int updateByPrimaryKey(Systemuser record);
+
+    Systemuser findUserByLoginname(String username);
 }
