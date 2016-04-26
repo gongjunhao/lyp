@@ -40,8 +40,7 @@ public class SystemUserServiceTest {
         systemuser.setLoginname("admin");
 
         //获取第1页，10条内容，默认查询总数count
-        PageHelper.startPage(2, 5);
-
+        PageHelper.startPage(2, 5, "id desc");
         //紧跟着的第一个select方法会被分页
         List<Systemuser> list = userDao.selectUserList(systemuser);
 

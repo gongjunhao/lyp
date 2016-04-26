@@ -267,16 +267,16 @@
               <a href="/admin/user/list">用户管理</a>
             </li>
             <li>
-              <a href="/admin/user/list">角色管理</a>
+              <a href="/admin/role/list">角色管理</a>
             </li>
             <li>
-              <a href="/admin/user/list">资源管理</a>
+              <a href="/admin/resource/list">资源管理</a>
             </li>
             <li>
-              <a href="/admin/user/list">权限管理</a>
+              <a href="/admin/permission/list">权限管理</a>
             </li>
             <li>
-              <a href="/admin/user/list">字典管理</a>
+              <a href="/admin/dictionary/list">字典管理</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
