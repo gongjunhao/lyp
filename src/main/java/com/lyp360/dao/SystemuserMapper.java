@@ -3,6 +3,8 @@ package com.lyp360.dao;
 import com.lyp360.entity.Systemuser;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SystemuserMapper {
     /**
@@ -52,4 +54,6 @@ public interface SystemuserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Systemuser record);
+
+    List<Systemuser> selectUserList(Systemuser user);
 }

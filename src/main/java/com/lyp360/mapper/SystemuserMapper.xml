@@ -32,6 +32,30 @@
     from SystemUser
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectUserList" resultMap="BaseResultMap" parameterType="com.lyp360.entity.Systemuser" >
+    select
+    <include refid="Base_Column_List" />
+    from SystemUser
+    where 1 = 1
+    <if test="id != null" >
+      and id = #{id,jdbcType=BIGINT}
+    </if>
+    <if test="loginname != null" >
+      and loginName = #{loginname,jdbcType=VARCHAR},
+    </if>
+    <if test="nickname != null" >
+      and nickName = #{nickname,jdbcType=VARCHAR},
+    </if>
+    <if test="password != null" >
+      and passWord = #{password,jdbcType=VARCHAR},
+    </if>
+    <if test="status != null" >
+      and status = #{status,jdbcType=VARCHAR},
+    </if>
+    <if test="createtime != null" >
+      and createTime = #{createtime,jdbcType=TIMESTAMP},
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     <!--
       WARNING - @mbggenerated
