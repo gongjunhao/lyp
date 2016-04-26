@@ -41,19 +41,19 @@
       and id = #{id,jdbcType=BIGINT}
     </if>
     <if test="loginname != null" >
-      and loginName = #{loginname,jdbcType=VARCHAR},
+      and loginName = #{loginname,jdbcType=VARCHAR}
     </if>
     <if test="nickname != null" >
-      and nickName = #{nickname,jdbcType=VARCHAR},
+      and nickName = #{nickname,jdbcType=VARCHAR}
     </if>
     <if test="password != null" >
-      and passWord = #{password,jdbcType=VARCHAR},
+      and passWord = #{password,jdbcType=VARCHAR}
     </if>
     <if test="status != null" >
-      and status = #{status,jdbcType=VARCHAR},
+      and status = #{status,jdbcType=VARCHAR}
     </if>
     <if test="createtime != null" >
-      and createTime = #{createtime,jdbcType=TIMESTAMP},
+      and createTime = #{createtime,jdbcType=TIMESTAMP}
     </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

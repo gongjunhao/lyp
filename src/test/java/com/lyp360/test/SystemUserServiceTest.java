@@ -2,6 +2,7 @@ package com.lyp360.test;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lyp360.dao.SystemuserMapper;
 import com.lyp360.entity.Systemuser;
 import org.junit.Test;
@@ -38,11 +39,14 @@ public class SystemUserServiceTest {
         systemuser.setLoginname("admin");
 
         //获取第1页，10条内容，默认查询总数count
-        PageHelper.startPage(1, 2);
+        PageHelper.startPage(2, 5);
 
         //紧跟着的第一个select方法会被分页
         List<Systemuser> list = userDao.selectUserList(systemuser);
-        String s = JSON.toJSONString(list, true);
+
+        PageInfo page = new PageInfo(list);
+
+        String s = JSON.toJSONString(page, true);
         System.out.println(s);
     }
 }
