@@ -101,7 +101,6 @@
                 /static/** = anon
                 /login = authc
                 /logout = logout
-                /authenticated = authc
                 /admin/** = user
                 /** = anon
             </value>

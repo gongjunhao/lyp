@@ -29,6 +29,12 @@
     from SystemUser
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="findUserByLoginname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from SystemUser
+    where loginName = #{loginName,jdbcType=BIGINT}
+  </select>
 
   <select id="selectUserList" resultMap="BaseResultMap" parameterType="com.lyp360.entity.Systemuser" >
     select

@@ -47,4 +47,9 @@ public class SystemUserServiceImpl implements ISystemUserService {
     public int updateByPrimaryKey(Systemuser record) {
         return systemuserMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public Systemuser findUserByLoginname(String username) {
+        return systemuserMapper.findUserByLoginname(username);
+    }
 }
