@@ -14,7 +14,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/admin/">乐优品科技系统管理</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/">乐优品科技系统管理</a>
   </div>
   <!-- /.navbar-header -->
 
@@ -223,7 +223,7 @@
         <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
         </li>
         <li class="divider"></li>
-        <li><a href="/static/lyp/pages/login.html"><i class="fa fa-sign-out fa-fw"></i>安全退出</a>
+        <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>安全退出</a>
         </li>
       </ul>
       <!-- /.dropdown-user -->
@@ -247,16 +247,16 @@
           <!-- /input-group -->
         </li>
         <li>
-          <a href="/admin/" class="active"><i class="fa fa-dashboard fa-fw"></i>控制面板</a>
+          <a href="${pageContext.request.contextPath}/admin/" class="active"><i class="fa fa-dashboard fa-fw"></i>控制面板</a>
         </li>
         <li>
           <a href="#"><i class="fa fa-credit-card fa-fw"></i>质保卡管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
-              <a href="/admin/insurance/code">生成质保卡号</a>
+              <a href="${pageContext.request.contextPath}/admin/insurance/code">生成质保卡号</a>
             </li>
             <li>
-              <a href="/admin/insurance/list">质保卡激活</a>
+              <a href="${pageContext.request.contextPath}/admin/insurance/list">质保卡激活</a>
             </li>
           </ul>
         </li>
@@ -264,19 +264,19 @@
           <a href="#"><i class="fa fa-gears fa-fw"></i>系统管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
-              <a href="/admin/user/list">用户管理</a>
+              <a href="${pageContext.request.contextPath}/admin/user/list">用户管理</a>
             </li>
             <li>
-              <a href="/admin/role/list">角色管理</a>
+              <a href="${pageContext.request.contextPath}/admin/role/list">角色管理</a>
             </li>
             <li>
-              <a href="/admin/resource/list">资源管理</a>
+              <a href="${pageContext.request.contextPath}/admin/resource/list">资源管理</a>
             </li>
             <li>
-              <a href="/admin/permission/list">权限管理</a>
+              <a href="${pageContext.request.contextPath}/admin/permission/list">权限管理</a>
             </li>
             <li>
-              <a href="/admin/dictionary/list">字典管理</a>
+              <a href="${pageContext.request.contextPath}/admin/dictionary/list">字典管理</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->
@@ -312,7 +312,7 @@
           <!-- /.nav-second-level -->
         </li>
         <li>
-          <a href="/static/lyp/pages/index.html" target="_blank"><i class="fa fa-globe fa-fw"></i>静态DEMO</a>
+          <a href="${pageContext.request.contextPath}/static/lyp/pages/index.html" target="_blank"><i class="fa fa-globe fa-fw"></i>静态DEMO</a>
         </li>
       </ul>
     </div>

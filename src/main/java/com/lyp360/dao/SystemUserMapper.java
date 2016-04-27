@@ -1,5 +1,6 @@
 package com.lyp360.dao;
 
+import com.lyp360.entity.SystemRole;
 import com.lyp360.entity.SystemUser;
 import org.springframework.stereotype.Repository;
 
@@ -56,4 +57,6 @@ public interface SystemUserMapper {
     int updateByPrimaryKey(SystemUser record);
 
     List<SystemUser> selectUserList(SystemUser systemuser);
+
+    SystemUser findUserByLoginName(String loginName);
 }

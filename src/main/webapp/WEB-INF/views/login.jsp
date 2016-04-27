@@ -49,17 +49,18 @@
                 <h1>乐优品科技</h1>
             </div>
             <div class="login-panel panel panel-default">
+                <div>${message_login}</div>
                 <div class="panel-heading">
                     <h3 class="panel-title">请登录</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="${pageContext.request.contextPath}/login" method="post">
+                    <form role="form" action="${pageContext.request.contextPath}/login" method="post" data-toggle="validator" role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="请输入登录名" name="username" type="text" autofocus>
+                                <input class="form-control" placeholder="请输入登录名" name="username" type="text" autofocus required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="请输入密码" name="password" type="password" value="">
+                                <input class="form-control" placeholder="请输入密码" name="password" type="password" value="" data-minlength="6" required>
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -87,6 +88,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="${pageContext.request.contextPath}/static/lyp/js/sb-admin-2.js"></script>
+
+<!-- validator JavaScript -->
+<script src="${pageContext.request.contextPath}/static/validator/validator.js"></script>
 
 </body>
 
