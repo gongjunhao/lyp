@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,11 +50,16 @@
                 <h1>乐优品科技</h1>
             </div>
             <div class="login-panel panel panel-default">
-                <div>${message_login}</div>
                 <div class="panel-heading">
                     <h3 class="panel-title">请登录</h3>
                 </div>
                 <div class="panel-body">
+                    <c:if test="${not empty message_login}">
+                        <div class="alert alert-danger alert-dismissable" >
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                ${message_login}
+                        </div>
+                    </c:if>
                     <form role="form" action="${pageContext.request.contextPath}/login" method="post" data-toggle="validator" role="form">
                         <fieldset>
                             <div class="form-group">
