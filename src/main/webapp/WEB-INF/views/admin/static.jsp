@@ -36,3 +36,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="${pageContext.request.contextPath}/static/lyp/js/sb-admin-2.js"></script>
+
+<!-- validator JavaScript -->
+<script src="${pageContext.request.contextPath}/static/validator/validator.js"></script>

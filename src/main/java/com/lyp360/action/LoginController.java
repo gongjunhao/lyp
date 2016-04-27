@@ -1,9 +1,13 @@
 package com.lyp360.action;
 
+import com.lyp360.dao.SystemUserMapper;
+import com.lyp360.entity.SystemUser;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +27,13 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
+    private Logger log = Logger.getLogger(getClass());
+
     @Resource
     private SessionDAO sessionDao;
+
+    @Autowired
+    private SystemUserMapper useDao;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(){
@@ -32,10 +41,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginProcess(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("remember") boolean remember, HttpServletRequest request) {
-        String resultPageURL = InternalResourceViewResolver.FORWARD_URL_PREFIX + "/";
+    public String loginProcess(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        token.setRememberMe(remember);
+        String remember = request.getParameter("remember");
+        if(!StringUtils.isEmpty(remember) && "1".equals(remember)){
+            token.setRememberMe(true);
+        }
         //获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();
         try {
@@ -46,7 +57,6 @@ public class LoginController {
             currentUser.login(token);
             System.out.println(sessionDao.getActiveSessions().iterator().next().getStartTimestamp());
             System.out.println("对用户[" + username + "]进行登录验证..验证通过");
-            resultPageURL = "main";
         }catch(UnknownAccountException uae){
             System.out.println("对用户[" + username + "]进行登录验证..验证未通过,未知账户");
             request.setAttribute("message_login", "未知账户");
@@ -68,6 +78,10 @@ public class LoginController {
         //验证是否登录成功
         if(currentUser.isAuthenticated()){
             System.out.println("用户[" + username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+            SystemUser user = useDao.findUserByLoginName(username);
+            user.setPassWord(null);
+            request.getSession().setAttribute("user", user);
+            currentUser.getSession().setAttribute("systemUser", user);
             return "redirect:/admin";
         }else{
             token.clear();

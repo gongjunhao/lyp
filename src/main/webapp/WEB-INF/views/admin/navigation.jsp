@@ -1,3 +1,4 @@
+<%@ page import="com.lyp360.entity.SystemUser" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -218,10 +219,8 @@
         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
       </a>
       <ul class="dropdown-menu dropdown-user">
-        <li><a href="#"><i class="fa fa-user fa-fw"></i>个人信息</a>
-        </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
-        </li>
+        <li><a href="#"><i class="fa fa-user fa-fw"></i>${sessionScope.user.nickName}</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/user/changePwd"><i class="fa fa-gear fa-fw"></i>修改密码</a></li>
         <li class="divider"></li>
         <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>安全退出</a>
         </li>
@@ -277,36 +276,6 @@
             </li>
             <li>
               <a href="${pageContext.request.contextPath}/admin/dictionary/list">字典管理</a>
-            </li>
-          </ul>
-          <!-- /.nav-second-level -->
-        </li>
-        <li>
-          <a href="#"><i class="glyphicon glyphicon-align-left fa-fw"></i>多级菜单<span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level collapse">
-            <li>
-              <a href="#">二级菜单</a>
-            </li>
-            <li>
-              <a href="#">二级菜单</a>
-            </li>
-            <li>
-              <a href="#">二级菜单<span class="fa arrow"></span></a>
-              <ul class="nav nav-third-level collapse">
-                <li>
-                  <a href="#">三级菜单</a>
-                </li>
-                <li>
-                  <a href="#">三级菜单</a>
-                </li>
-                <li>
-                  <a href="#">三级菜单</a>
-                </li>
-                <li>
-                  <a href="#">三级菜单</a>
-                </li>
-              </ul>
-              <!-- /.nav-third-level -->
             </li>
           </ul>
           <!-- /.nav-second-level -->

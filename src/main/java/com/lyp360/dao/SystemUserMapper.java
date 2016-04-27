@@ -59,4 +59,5 @@ public interface SystemUserMapper {
     List<SystemUser> selectUserList(SystemUser systemuser);
 
     SystemUser findUserByLoginName(String loginName);
+
 }

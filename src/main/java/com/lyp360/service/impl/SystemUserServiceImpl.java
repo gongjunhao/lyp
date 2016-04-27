@@ -7,6 +7,8 @@ import com.lyp360.service.ISystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by GongJunhao on 2016/4/25.
  *
@@ -46,5 +48,15 @@ public class SystemUserServiceImpl implements ISystemUserService {
     @Override
     public int updateByPrimaryKey(SystemUser record) {
         return systemuserMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<SystemUser> selectUserList(SystemUser systemuser) {
+        return systemuserMapper.selectUserList(systemuser);
+    }
+
+    @Override
+    public SystemUser findUserByLoginName(String loginName) {
+        return systemuserMapper.findUserByLoginName(loginName);
     }
 }

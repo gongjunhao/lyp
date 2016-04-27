@@ -61,8 +61,8 @@
     focus: true,
     custom: {},
     errors: {
-      match: 'Does not match',
-      minlength: 'Not long enough'
+      match: '两次输入不一致',
+      minlength: '长度不够'
     },
     feedback: {
       success: 'glyphicon-ok',
