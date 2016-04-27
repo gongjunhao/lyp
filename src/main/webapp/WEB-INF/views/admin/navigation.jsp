@@ -263,7 +263,7 @@
           <a href="#"><i class="fa fa-gears fa-fw"></i>系统管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
-              <a href="${pageContext.request.contextPath}/admin/user/list">用户管理</a>
+              <a href="${pageContext.request.contextPath}/admin/user/listPage">用户管理</a>
             </li>
             <li>
               <a href="${pageContext.request.contextPath}/admin/role/list">角色管理</a>

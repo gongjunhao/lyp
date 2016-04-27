@@ -1,0 +1,1 @@
+var lypApp = angular.module('lypApp', ['ui.bootstrap']);
