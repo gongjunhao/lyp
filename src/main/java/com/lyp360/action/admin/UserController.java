@@ -1,7 +1,9 @@
 package com.lyp360.action.admin;
 
 import com.lyp360.dao.SystemUserMapper;
+import com.lyp360.entity.SystemRole;
 import com.lyp360.entity.SystemUser;
+import com.lyp360.service.ISystemRoleService;
 import com.lyp360.service.ISystemUserService;
 import com.lyp360.utils.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by GongJunhao on 2016/4/27.
@@ -25,9 +28,20 @@ public class UserController {
     @Autowired
     private ISystemUserService userService;
 
+    @Autowired
+    private ISystemRoleService roleService;
+
     @RequestMapping(value = "/changePwd", method = RequestMethod.GET)
     public String changePwd(HttpServletRequest request) {
         return "/admin/user/changePwd";
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String info(HttpServletRequest request, Model model) {
+        SystemUser user = (SystemUser)request.getSession().getAttribute("user");
+        List<SystemRole> roles = roleService.getRolesByUserId(user.getId());
+        model.addAttribute("roles", roles);
+        return "/admin/user/info";
     }
 
     @RequestMapping(value = "/pwdValidate", method = RequestMethod.GET)
