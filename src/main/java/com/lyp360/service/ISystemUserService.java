@@ -1,6 +1,6 @@
 package com.lyp360.service;
 
-import com.lyp360.entity.Systemuser;
+import com.lyp360.entity.SystemUser;
 
 /**
  * Created by GongJunhao on 2016/4/25.
@@ -8,9 +8,9 @@ import com.lyp360.entity.Systemuser;
  */
 public interface ISystemUserService {
     int deleteByPrimaryKey(Long id);
-    int insert(Systemuser record);
-    int insertSelective(Systemuser record);
-    Systemuser selectByPrimaryKey(Long id);
-    int updateByPrimaryKeySelective(Systemuser record);
-    int updateByPrimaryKey(Systemuser record);
+    int insert(SystemUser record);
+    int insertSelective(SystemUser record);
+    SystemUser selectByPrimaryKey(Long id);
+    int updateByPrimaryKeySelective(SystemUser record);
+    int updateByPrimaryKey(SystemUser record);
 }

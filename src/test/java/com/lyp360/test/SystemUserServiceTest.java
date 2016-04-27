@@ -3,8 +3,8 @@ package com.lyp360.test;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lyp360.dao.SystemuserMapper;
-import com.lyp360.entity.Systemuser;
+import com.lyp360.dao.SystemUserMapper;
+import com.lyp360.entity.SystemUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +22,27 @@ import java.util.List;
 public class SystemUserServiceTest {
 
     @Autowired
-    private SystemuserMapper userDao;
+    private SystemUserMapper userDao;
 
     @Test
     public void insertUser(){
         for (int i=0; i<=20; i++){
-            Systemuser systemuser = new Systemuser();
+            SystemUser systemuser = new SystemUser();
             systemuser.setId(Long.valueOf(i));
-            systemuser.setLoginname("admin");
+            systemuser.setLoginName("admin");
             userDao.insert(systemuser);
         }
     }
 
     @Test
     public void selectUsers() {
-        Systemuser systemuser = new Systemuser();
-        systemuser.setLoginname("admin");
+        SystemUser systemuser = new SystemUser();
+        systemuser.setLoginName("admin");
 
         //获取第1页，10条内容，默认查询总数count
         PageHelper.startPage(2, 5, "id desc");
         //紧跟着的第一个select方法会被分页
-        List<Systemuser> list = userDao.selectUserList(systemuser);
+        List<SystemUser> list = userDao.selectUserList(systemuser);
 
         PageInfo page = new PageInfo(list);
 
