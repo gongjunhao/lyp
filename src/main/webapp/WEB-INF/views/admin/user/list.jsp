@@ -81,34 +81,8 @@
                                                    aria-describedby="dataTables-example_info">
                                                 <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0"
-                                                        aria-controls="dataTables-example" rowspan="1" colspan="1"
-                                                        aria-sort="ascending"
-                                                        aria-label="Rendering engine: activate to sort column descending"
-                                                        style="width: 40px;">ID
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Browser: activate to sort column ascending"
-                                                        style="width: 100px;">登录名
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Platform(s): activate to sort column ascending"
-                                                        style="width: 100px;">昵称
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Engine version: activate to sort column ascending"
-                                                        style="width: 80px;">状态
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTables-example"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="CSS grade: activate to sort column ascending"
-                                                        style="width: 100px;">注册时间
-                                                    </th>
-                                                    <th rowspan="1" colspan="1" style="width: 100px;">
-                                                        操作
+                                                    <th class="{{head.class}}" tabindex={{$index}}" ng-repeat="head in tableHead"
+                                                        aria-sort="{{head.code}}" ng-click="sortColumn(head)" style="{{head.style}}">{{head.name}}
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -118,8 +92,11 @@
                                                     <td>{{u.loginName}}</td>
                                                     <td>{{u.nickName}}</td>
                                                     <td class="center">{{u.status}}</td>
-                                                    <td class="center">{{u.createTime}}</td>
-                                                    <td class="center">编辑删除</td>
+                                                    <td class="center">{{u.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                                    <td class="center">
+                                                        <button type="button" class="btn btn-outline btn-primary btn-xs">编辑</button>
+                                                        <button type="button" class="btn btn-outline btn-danger btn-xs">删除</button>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -127,7 +104,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="dataTables_length" id="dataTables-example_length">
+                                            <div class="dataTables_length pagination" id="dataTables-example_length">
                                                 <label>每页显示
                                                     <select ng-model="pager.pageSize" ng-change="list()" class="form-control input-sm"  ng-options="m for m in [10, 25, 50, 100]"></select>
                                                     条

@@ -51,19 +51,19 @@
     <include refid="Base_Column_List" />
     from systemuser
     where 1 = 1
-    <if test="id != null" >
+    <if test="id != null and id != ''" >
       and id = #{id,jdbcType=BIGINT}
     </if>
-    <if test="loginName != null" >
+    <if test="loginName != null and loginName != ''" >
       and loginName = #{loginName,jdbcType=VARCHAR}
     </if>
-    <if test="nickName != null" >
-      and nickName LIKE "%"#{nickName,jdbcType=VARCHAR}"%"
+    <if test="nickName != null and nickName != '' " >
+      and nickName LIKE  CONCAT('%',#{nickName},'%')
     </if>
-    <if test="passWord != null" >
+    <if test="passWord != null and passWord != ''" >
       and passWord = #{passWord,jdbcType=VARCHAR}
     </if>
-    <if test="status != null" >
+    <if test="status != null and status != ''" >
       and status = #{status,jdbcType=VARCHAR}
     </if>
   </select>

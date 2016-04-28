@@ -10,6 +10,7 @@ import com.lyp360.entity.SystemUser;
 import com.lyp360.service.ISystemRoleService;
 import com.lyp360.service.ISystemUserService;
 import com.lyp360.utils.MD5;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin/user")
 public class UserController {
+
+    private Logger log = Logger.getLogger(getClass());
 
     @Autowired
     private ISystemUserService userService;
@@ -53,13 +56,15 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public PageInfo list(@RequestBody String json) {
+        log.debug(json);
         JSONObject data = JSON.parseObject(json);
         int pageNum = data.getInteger("pageNum");
         int pageSize = data.getInteger("pageSize");
         String orderBy = data.getString("orderBy");
+        String sort = data.getString("sort");
         SystemUser user = data.getObject("user", SystemUser.class);
         //获取第1页，10条内容，默认查询总数count
-        PageHelper.startPage(pageNum, pageSize, orderBy);
+        PageHelper.startPage(pageNum, pageSize, orderBy + " " + sort);
         //紧跟着的第一个select方法会被分页
         List<SystemUser> list = userService.selectUserList(user);
         PageInfo page = new PageInfo(list);
