@@ -17,6 +17,10 @@
 
 <!-- Custom Fonts -->
 <link href="${pageContext.request.contextPath}/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- bootstrap-notify css -->
+<link href="${pageContext.request.contextPath}/static/bootstrap-notify/css/bootstrap-notify.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/bootstrap-notify/css/styles/alert-bangtidy.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/bootstrap-notify/css/styles/alert-blackgloss.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,6 +49,9 @@
 
 <!-- ui-bootstrap-tpls JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/ui-bootstrap-tpls-1.3.2.min.js"></script>
+
+<!-- bootstrap-notify JavaScript -->
+<script src="${pageContext.request.contextPath}/static/bootstrap-notify/js/bootstrap-notify.js"></script>
 
 <!-- lypApp JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/lypApp.js"></script>

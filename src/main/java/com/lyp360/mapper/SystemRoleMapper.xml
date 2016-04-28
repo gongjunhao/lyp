@@ -32,9 +32,12 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    r.*
-    from systemRole r, SystemUserRole s where r.id = s.roleId and s.userId = #{userId,jdbcType=BIGINT}
+    select r.*
+    from systemRole r, SystemUserRole s, SystemUser u
+    where s.userId = #{userId,jdbcType=BIGINT}
+      AND  u.status != 'del'
+      AND  r.id = s.roleId
+      AND  s.userId = u.id
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     <!--

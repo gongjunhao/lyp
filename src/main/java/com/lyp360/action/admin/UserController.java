@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,6 +78,26 @@ public class UserController {
     public void update(@RequestBody String user) {
         try {
             SystemUser curUser = JSON.parseObject(user, SystemUser.class);
+            if(curUser.getId() != null){
+                userService.updateByPrimaryKeySelective(curUser);
+            } else {
+                curUser.setCreateTime(new Date());
+                curUser.setStatus("0");
+                curUser.setPassWord(MD5.GetMD5Code(curUser.getPassWord()));
+                userService.insert(curUser);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    public void del(@RequestBody String user) {
+        try {
+            SystemUser curUser = JSON.parseObject(user, SystemUser.class);
+            curUser.setStatus("del");
             userService.updateByPrimaryKeySelective(curUser);
         } catch (Exception e){
             e.printStackTrace();

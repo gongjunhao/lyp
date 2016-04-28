@@ -47,6 +47,54 @@ lypApp.controller('userController', function ($scope, $http, $uibModal) {
             //$scope.selected = selectedItem;
             console.log(data);
             $scope.list();
+            $('.bottom-right').notify({
+                type:'info',
+                message: { text: '更新成功! ' }
+            }).show();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.addUser = function () {
+        var user = {};
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'updateDialog.html',
+            controller: 'userUpdateController',
+            resolve: { user: user }
+        });
+        //弹窗更新完毕后，刷新列表
+        modalInstance.result.then(function (data) {
+            console.log(data);
+            $scope.list();
+            $('.bottom-right').notify({
+                type:'success',
+                message: { text: '新增成功!' }
+            }).show();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    //删除提示弹框
+    $scope.delete = function (user) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'deleteConfirm.html',
+            controller: 'userUpdateController',
+            size: "sm",
+            resolve: { user: user }
+        });
+        //弹窗更新完毕后，刷新列表
+        modalInstance.result.then(function (data) {
+            //$scope.selected = selectedItem;
+            console.log(data);
+            $scope.list();
+            $('.bottom-right').notify({
+                type:'info',
+                message: { text: '删除成功!' }
+            }).show();
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
         });
@@ -109,6 +157,21 @@ lypApp.controller('userUpdateController', function ($scope,  $http, $uibModalIns
         } else {
             alert("请修正表单后，再提交");
         }
+    };
+
+    $scope.updateDel = function () {
+        $http({
+            method: 'POST',
+            url: '/admin/user/del',
+            data: user
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $uibModalInstance.close("删除成功");
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
     };
 
     $scope.cancel = function () {

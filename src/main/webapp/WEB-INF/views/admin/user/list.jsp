@@ -34,8 +34,11 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            用户列表
+                        <div class="panel-heading clearfix">
+                            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">用户列表</h4>
+                            <div class="btn-group pull-right">
+                                <a href="#" class="btn btn-success btn-sm" ng-click="addUser()">新增用户</a>
+                            </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -130,6 +133,8 @@
         <!-- /.container-fluid -->
     </div>
 
+    <div class='notifications bottom-right'></div>
+
     <div id="dialogs">
         <script type="text/ng-template" id="updateDialog.html">
             <div class="modal-header">
@@ -139,21 +144,38 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>登录名:</label>
-                        <input type="text" ng-model="user.loginName" class="form-control" disabled>
+                        <input type="text" ng-model="user.loginName" class="form-control" ng-disabled="user.id != null">
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : userForm.nickName.$invalid && !userForm.nickName.$pristine }">
                         <label>昵称:</label>
                         <input type="text" name="nickName" class="form-control" ng-model="user.nickName" required>
                         <p ng-show="userForm.nickName.$invalid && !userForm.nickName.$pristine" class="help-block">昵称必填.</p>
                     </div>
-                    <div class="form-group" ng-if="false">
-                        <label>注册日期:</label>
-                        <input type="text" ng-model="user.createTime" class="form-control" disabled>
+                    <div class="form-group"  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }"  ng-if="user.id == null">
+                        <label>密码:</label>
+                        <input type="password" ng-model="user.password" class="form-control" ng-disabled="user.id != null" required minlength="6">
+                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">密码必填.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit" >保存</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/ng-template" id="deleteConfirm.html">
+            <div class="modal-header">
+                <h3 class="modal-title">删除提示</h3>
+            </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">您确认删除用户：{{user.loginName}}吗？</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="updateDel()">确认</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
                 </div>
             </form>
         </script>
