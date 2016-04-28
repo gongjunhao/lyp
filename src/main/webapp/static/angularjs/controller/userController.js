@@ -1,4 +1,4 @@
-lypApp.controller('userController', function ($scope, $http) {
+lypApp.controller('userController', function ($scope, $http, $uibModal) {
     $scope.user = {};
 
     $scope.pager = {
@@ -33,6 +33,25 @@ lypApp.controller('userController', function ($scope, $http) {
         });
     };
 
+
+    $scope.upate = function (user) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'updateDialog.html',
+            controller: 'userUpdateController',
+            //size: "lg",
+            resolve: { user: user }
+        });
+        //弹窗更新完毕后，刷新列表
+        modalInstance.result.then(function (data) {
+            //$scope.selected = selectedItem;
+            console.log(data);
+            $scope.list();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
     //表头排序
     $scope.sortColumn = function(head) {
         if(head.code != ""){
@@ -64,4 +83,31 @@ lypApp.controller('userController', function ($scope, $http) {
     }
 
     $scope.list();
+});
+
+
+
+
+lypApp.controller('userUpdateController', function ($scope,  $http, $uibModalInstance, user) {
+
+    $scope.user = user;
+
+    $scope.save = function () {
+        $http({
+            method: 'POST',
+            url: '/admin/user/update',
+            data: user
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $uibModalInstance.close("更新成功");
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

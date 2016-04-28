@@ -41,10 +41,10 @@
 <script src="${pageContext.request.contextPath}/static/validator/validator.js"></script>
 
 <!-- angular JavaScript -->
-<script src="${pageContext.request.contextPath}/static/angularjs/angular1.3.15.js"></script>
+<script src="${pageContext.request.contextPath}/static/angularjs/angular.min1.5.5.js"></script>
 
 <!-- ui-bootstrap-tpls JavaScript -->
-<script src="${pageContext.request.contextPath}/static/angularjs/ui-bootstrap-tpls-0.12.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/angularjs/ui-bootstrap-tpls-1.3.2.min.js"></script>
 
 <!-- lypApp JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/lypApp.js"></script>

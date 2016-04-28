@@ -94,8 +94,8 @@
                                                     <td class="center">{{u.status}}</td>
                                                     <td class="center">{{u.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                                     <td class="center">
-                                                        <button type="button" class="btn btn-outline btn-primary btn-xs">编辑</button>
-                                                        <button type="button" class="btn btn-outline btn-danger btn-xs">删除</button>
+                                                        <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="upate(u)">编辑</button>
+                                                        <button type="button" class="btn btn-outline btn-danger btn-xs" ng-click="delete(u)">删除</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -112,8 +112,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <pagination total-items="pager.total" ng-model="pager.pageNum" ng-change="list()" items-per-page="pager.pageSize" max-size="10" class="pagination-sm"
-                                                        boundary-links="true" rotate="false" first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页" ></pagination>
+                                            <uib-pagination total-items="pager.total" ng-model="pager.pageNum"  ng-change="list()"  items-per-page="pager.pageSize" max-size="10" class="pagination-sm"
+                                                            boundary-links="true" force-ellipses="true" rotate="false" first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页" ></uib-pagination>
                                         </div>
                                     </div>
                                 </div>
@@ -130,6 +130,31 @@
         <!-- /.container-fluid -->
     </div>
 
+    <div id="dialogs">
+        <script type="text/ng-template" id="updateDialog.html">
+            <div class="modal-header">
+                <h3 class="modal-title">更新用户信息</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>登录名:</label>
+                    <input type="text" ng-model="user.loginName" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>昵称:</label>
+                    <input type="text" ng-model="user.nickName" class="form-control">
+                </div>
+                <div class="form-group" ng-if="false">
+                    <label>注册日期:</label>
+                    <input type="text" ng-model="user.createTime" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="save()">保存</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
+            </div>
+        </script>
+    </div>
 </div>
 <!-- /#wrapper -->
 

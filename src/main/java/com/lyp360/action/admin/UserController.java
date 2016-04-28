@@ -12,6 +12,7 @@ import com.lyp360.service.ISystemUserService;
 import com.lyp360.utils.MD5;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,17 @@ public class UserController {
         List<SystemUser> list = userService.selectUserList(user);
         PageInfo page = new PageInfo(list);
         return page;
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(@RequestBody String user) {
+        try {
+            SystemUser curUser = JSON.parseObject(user, SystemUser.class);
+            userService.updateByPrimaryKeySelective(curUser);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping(value = "/pwdValidate", method = RequestMethod.GET)
