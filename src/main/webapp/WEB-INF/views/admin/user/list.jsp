@@ -43,23 +43,35 @@
                                 <div id="dataTables-example_wrapper"
                                      class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_length" id="dataTables-example_length">
-                                                <label>每页显示
-                                                    <select name="pageSize" aria-controls="dataTables-example" class="form-control input-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>
-                                                    条
+                                        <div class="col-sm-3">
+                                            <div id="dataTables-0" class="dataTables_filter">
+                                                <label>
+                                                    登录名:
+                                                    <input type="text" class="form-control input-sm" placeholder="" ng-model="user.loginName" aria-controls="dataTables-example">
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div id="dataTables-example_filter" class="dataTables_filter"><label>Search:<input
-                                                    type="search" class="form-control input-sm" placeholder=""
-                                                    aria-controls="dataTables-example"></label></div>
+                                        <div class="col-sm-3">
+                                            <div id="dataTables-1" class="dataTables_filter">
+                                                <label>
+                                                    昵称:
+                                                    <input type="text" class="form-control input-sm" placeholder="" ng-model="user.nickName" aria-controls="dataTables-example">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div id="dataTables-2" class="dataTables_filter">
+                                                <label>
+                                                    状态:
+                                                    <input type="text" class="form-control input-sm" placeholder="" ng-model="user.status" aria-controls="dataTables-example">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div id="dataTables-3" class="dataTables_filter">
+                                                <button type="button" class="btn btn-info" ng-click="list()">查询</button>
+                                                <button type="button" class="btn btn-info" ng-click="user={}">清空</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -101,7 +113,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr class="gradeA odd" role="row" ng-repeat="u in users">
+                                                <tr class="gradeA odd" role="row" ng-repeat="u in pager.list">
                                                     <td class="sorting_1">{{u.id}}</td>
                                                     <td>{{u.loginName}}</td>
                                                     <td>{{u.nickName}}</td>
@@ -115,35 +127,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="dataTables_info" id="dataTables-example_info" role="status"
-                                                 aria-live="polite">显示 1 至 10 共 57 条记录
+                                            <div class="dataTables_length" id="dataTables-example_length">
+                                                <label>每页显示
+                                                    <select ng-model="pager.pageSize" ng-change="list()" class="form-control input-sm"  ng-options="m for m in [10, 25, 50, 100]"></select>
+                                                    条
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="dataTables-example_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button previous disabled"
-                                                        aria-controls="dataTables-example" tabindex="0"
-                                                        id="dataTables-example_previous"><a href="#">上一页</a></li>
-                                                    <li class="paginate_button active"
-                                                        aria-controls="dataTables-example" tabindex="0"><a
-                                                            href="#">1</a></li>
-                                                    <li class="paginate_button " aria-controls="dataTables-example"
-                                                        tabindex="0"><a href="#">2</a></li>
-                                                    <li class="paginate_button " aria-controls="dataTables-example"
-                                                        tabindex="0"><a href="#">3</a></li>
-                                                    <li class="paginate_button " aria-controls="dataTables-example"
-                                                        tabindex="0"><a href="#">4</a></li>
-                                                    <li class="paginate_button " aria-controls="dataTables-example"
-                                                        tabindex="0"><a href="#">5</a></li>
-                                                    <li class="paginate_button " aria-controls="dataTables-example"
-                                                        tabindex="0"><a href="#">6</a></li>
-                                                    <li class="paginate_button next" aria-controls="dataTables-example"
-                                                        tabindex="0" id="dataTables-example_next"><a href="#">下一页</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <pagination total-items="pager.total" ng-model="pager.pageNum" ng-change="list()" items-per-page="pager.pageSize" max-size="10" class="pagination-sm"
+                                                        boundary-links="true" rotate="false" first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页" ></pagination>
                                         </div>
                                     </div>
                                 </div>

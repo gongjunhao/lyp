@@ -1,12 +1,13 @@
 lypApp.controller('userController', function ($scope, $http) {
-    $scope.users = [];
     $scope.user = {};
-    $scope.pageNum = 1;
-    $scope.pageSize = 10;
+    $scope.pager = {
+        pageNum:1,
+        pageSize:10
+    };
 
     $scope.list = function () {
-        var data = {pageNum:$scope.pageNum,
-                     pageSize:$scope.pageSize,
+        var data = {pageNum:$scope.pager.pageNum,
+                     pageSize:$scope.pager.pageSize,
                     user:$scope.user,
                     orderby:$scope.orderby,
                     sort:$scope.sort
@@ -18,7 +19,7 @@ lypApp.controller('userController', function ($scope, $http) {
         }).then(function successCallback(response) {
             console.log(response);
             if(response.status == 200){
-                $scope.users = response.data.list;
+                $scope.pager = response.data;
             }
         }, function errorCallback(response) {
             console.log(response);
