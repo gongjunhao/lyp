@@ -92,19 +92,23 @@ lypApp.controller('userUpdateController', function ($scope,  $http, $uibModalIns
 
     $scope.user = user;
 
-    $scope.save = function () {
-        $http({
-            method: 'POST',
-            url: '/admin/user/update',
-            data: user
-        }).then(function successCallback(response) {
-            console.log(response);
-            if(response.status == 200){
-                $uibModalInstance.close("更新成功");
-            }
-        }, function errorCallback(response) {
-            console.log(response);
-        });
+    $scope.save = function (vaild) {
+        if(vaild){
+            $http({
+                method: 'POST',
+                url: '/admin/user/update',
+                data: user
+            }).then(function successCallback(response) {
+                console.log(response);
+                if(response.status == 200){
+                    $uibModalInstance.close("更新成功");
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+        } else {
+            alert("请修正表单后，再提交");
+        }
     };
 
     $scope.cancel = function () {

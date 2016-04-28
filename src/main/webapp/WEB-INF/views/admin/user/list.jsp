@@ -135,24 +135,27 @@
             <div class="modal-header">
                 <h3 class="modal-title">更新用户信息</h3>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>登录名:</label>
-                    <input type="text" ng-model="user.loginName" class="form-control" disabled>
+            <form name="userForm" ng-submit="save(userForm.$valid)" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>登录名:</label>
+                        <input type="text" ng-model="user.loginName" class="form-control" disabled>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.nickName.$invalid && !userForm.nickName.$pristine }">
+                        <label>昵称:</label>
+                        <input type="text" name="nickName" class="form-control" ng-model="user.nickName" required>
+                        <p ng-show="userForm.nickName.$invalid && !userForm.nickName.$pristine" class="help-block">昵称必填.</p>
+                    </div>
+                    <div class="form-group" ng-if="false">
+                        <label>注册日期:</label>
+                        <input type="text" ng-model="user.createTime" class="form-control" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>昵称:</label>
-                    <input type="text" ng-model="user.nickName" class="form-control">
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" >保存</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
                 </div>
-                <div class="form-group" ng-if="false">
-                    <label>注册日期:</label>
-                    <input type="text" ng-model="user.createTime" class="form-control" disabled>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="save()">保存</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
-            </div>
+            </form>
         </script>
     </div>
 </div>
