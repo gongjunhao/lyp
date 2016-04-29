@@ -1,6 +1,7 @@
 package com.lyp360.service;
 
 import com.lyp360.entity.SystemRole;
+import com.lyp360.entity.SystemUser;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface ISystemRoleService {
     int updateByPrimaryKeySelective(SystemRole record);
     int updateByPrimaryKey(SystemRole record);
     List<SystemRole> getRolesByUserId(Long userId);
+
+    List<SystemRole> selectRoleList(SystemRole role);
+
+    SystemRole findRoleByRoleCode(String roleCode);
 }

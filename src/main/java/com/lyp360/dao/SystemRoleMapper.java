@@ -55,4 +55,8 @@ public interface SystemRoleMapper {
     int updateByPrimaryKey(SystemRole record);
 
     List<SystemRole> getRolesByUserId(Long userId);
+
+    List<SystemRole> selectRoleList(SystemRole role);
+
+    SystemRole findRoleByRoleCode(String roleCode);
 }

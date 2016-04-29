@@ -52,4 +52,14 @@ public class SystemRoleServiceImpl implements ISystemRoleService{
     public List<SystemRole> getRolesByUserId(Long userId) {
         return roleDao.getRolesByUserId(userId);
     }
+
+    @Override
+    public List<SystemRole> selectRoleList(SystemRole role) {
+        return roleDao.selectRoleList(role);
+    }
+
+    @Override
+    public SystemRole findRoleByRoleCode(String roleCode) {
+        return roleDao.findRoleByRoleCode(roleCode);
+    }
 }

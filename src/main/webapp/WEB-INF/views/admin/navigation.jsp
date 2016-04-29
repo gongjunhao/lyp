@@ -266,16 +266,16 @@
               <a href="${pageContext.request.contextPath}/admin/user/listPage">用户管理</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/admin/role/list">角色管理</a>
+              <a href="${pageContext.request.contextPath}/admin/role/listPage">角色管理</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/admin/resource/list">资源管理</a>
+              <a href="${pageContext.request.contextPath}/admin/resource/listPage">资源管理</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/admin/permission/list">权限管理</a>
+              <a href="${pageContext.request.contextPath}/admin/permission/listPage">权限管理</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/admin/dictionary/list">字典管理</a>
+              <a href="${pageContext.request.contextPath}/admin/dictionary/listPage">字典管理</a>
             </li>
           </ul>
           <!-- /.nav-second-level -->

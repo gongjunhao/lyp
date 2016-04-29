@@ -3,8 +3,8 @@ package com.lyp360.test;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lyp360.dao.SystemUserMapper;
 import com.lyp360.entity.SystemUser;
+import com.lyp360.service.ISystemUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.List;
 public class SystemUserServiceTest {
 
     @Autowired
-    private SystemUserMapper userDao;
+    private ISystemUserService userService;
 
     @Test
     public void insertUser(){
@@ -30,7 +30,7 @@ public class SystemUserServiceTest {
             SystemUser systemuser = new SystemUser();
             systemuser.setId(Long.valueOf(i));
             systemuser.setLoginName("admin"+i);
-            userDao.insert(systemuser);
+            userService.insert(systemuser);
         }
     }
 
@@ -42,11 +42,19 @@ public class SystemUserServiceTest {
         //获取第1页，10条内容，默认查询总数count
         PageHelper.startPage(1,10, "id desc");
         //紧跟着的第一个select方法会被分页
-        List<SystemUser> list = userDao.selectUserList(systemuser);
+        List<SystemUser> list = userService.selectUserList(systemuser);
 
         PageInfo page = new PageInfo(list);
 
         String s = JSON.toJSONString(page, true);
+        System.out.println(s);
+    }
+
+    @Test
+    public void findUserByLoginName() {
+        SystemUser user = userService.findUserByLoginName("admin");
+        //SystemUser user = userService.selectByPrimaryKey(0l);
+        String s = JSON.toJSONString(user, true);
         System.out.println(s);
     }
 }
