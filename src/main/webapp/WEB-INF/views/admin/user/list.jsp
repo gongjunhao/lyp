@@ -142,23 +142,33 @@
             </div>
             <form name="userForm" ng-submit="save(userForm.$valid)" novalidate>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div ng-class="{ 'form-group':true, 'has-error': userForm.loginName.$invalid && userForm.$submitted }">
                         <label>登录名:</label>
-                        <input type="text" ng-model="user.loginName" class="form-control" ng-disabled="user.id != null">
+                        <input type="text"  name="loginName" ng-model="user.loginName" class="form-control" ng-disabled="user.id != null"
+                               ng-remote-validate="${pageContext.request.contextPath}/admin/user/validLoginName" required>
+                        <div ng-show="userForm.loginName.$touched || userForm.$submitted"  class="help-block">
+                            <div ng-show="userForm.loginName.$error.required ">登录名必填.</div>
+                            <div ng-show="userForm.loginName.$error.ngRemoteValidate">登录名已被占用</div>
+                        </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error' : userForm.nickName.$invalid && !userForm.nickName.$pristine }">
+                    <div ng-class="{ 'form-group':true, 'has-error': userForm.nickName.$invalid && userForm.$submitted }">
                         <label>昵称:</label>
                         <input type="text" name="nickName" class="form-control" ng-model="user.nickName" required>
-                        <p ng-show="userForm.nickName.$invalid && !userForm.nickName.$pristine" class="help-block">昵称必填.</p>
+                        <div ng-show="userForm.nickName.$touched || userForm.$submitted"  class="help-block">
+                            <div ng-show="userForm.nickName.$error.required">昵称必填.</div>
+                        </div>
                     </div>
-                    <div class="form-group"  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }"  ng-if="user.id == null">
+                    <div ng-class="{ 'form-group':true, 'has-error': userForm.password.$invalid && userForm.$submitted }" ng-if="user.id == null">
                         <label>密码:</label>
-                        <input type="password" ng-model="user.password" class="form-control" ng-disabled="user.id != null" required minlength="6">
-                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">密码必填.</p>
+                        <input type="password" name="password" ng-model="user.password" class="form-control" ng-disabled="user.id != null" required minlength="6">
+                        <div ng-show="userForm.password.$touched || userForm.$submitted"  class="help-block">
+                            <div ng-show="userForm.password.$error.required">密码必填.</div>
+                            <div ng-show="userForm.password.$error.minlength">密码长度不能小于6位</div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" >保存</button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="userForm.$pending" >保存</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">关闭</button>
                 </div>
             </form>

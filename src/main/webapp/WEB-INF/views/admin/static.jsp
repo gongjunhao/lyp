@@ -53,5 +53,8 @@
 <!-- bootstrap-notify JavaScript -->
 <script src="${pageContext.request.contextPath}/static/bootstrap-notify/js/bootstrap-notify.js"></script>
 
+<!-- bootstrap-notify JavaScript -->
+<script src="${pageContext.request.contextPath}/static/angularjs/plugins/ngRemoteValidate.0.6.1.js"></script>
+
 <!-- lypApp JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/lypApp.js"></script>

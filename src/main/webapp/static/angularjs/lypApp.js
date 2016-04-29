@@ -1,4 +1,4 @@
-var lypApp = angular.module('lypApp', ['ui.bootstrap']);
+var lypApp = angular.module('lypApp', ['ui.bootstrap', 'remoteValidation']);
 
 /**
  * 日期时间长整型（毫秒数）转换为日期（Date）

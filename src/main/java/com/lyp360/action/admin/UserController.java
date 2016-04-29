@@ -91,6 +91,30 @@ public class UserController {
         }
     }
 
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/validLoginName", method = RequestMethod.POST)
+    public JSONObject validLoginName(@RequestBody String json) {
+        try {
+            log.debug(json);
+            String loginName = JSON.parseObject(json).getString("value");
+            SystemUser user = userService.findUserByLoginName(loginName);
+            JSONObject object = new JSONObject();
+            if(user != null){
+                object.put("isValid", false);
+                object.put("value", loginName);
+            } else {
+                object.put("isValid", true);
+                object.put("value", loginName);
+            }
+            return object;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.POST)
