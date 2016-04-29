@@ -172,7 +172,7 @@
             </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">您确认删除角色：{{role.loginName}}吗？</div>
+                        <div class="col-md-6 col-md-offset-3">您确认删除角色：{{role.roleName}}吗？</div>
                     </div>
                 </div>
                 <div class="modal-footer">
