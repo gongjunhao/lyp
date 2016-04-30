@@ -16,7 +16,7 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
     $scope.tableHead.push({code:"code",         name:"激活码",        class:"sorting",     style:"width:100px;",    sort:""});
     $scope.tableHead.push({code:"mark",         name:"备注",          class:"sorting",     style:"width:100px;",    sort:""});
     $scope.tableHead.push({code:"status",       name:"状态",          class:"sorting",     style:"width:80px;",     sort:""});
-    $scope.tableHead.push({code:"createTime",  name:"注册时间",      class:"sorting",     style:"width:100px;",    sort:""});
+    $scope.tableHead.push({code:"createTime",  name:"生成时间",      class:"sorting",     style:"width:100px;",    sort:""});
     $scope.tableHead.push({code:"",              name:"操作",          class:"",            style:"width:100px;",    sort:""});
 
     $scope.list = function () {
