@@ -45,7 +45,7 @@ create table Dictionary
    id                   bigint not null auto_increment comment '主键',
    parentId             bigint comment '父级ID',
    name                 varchar(100) comment '名称',
-   mark                 varchar(200) comment '描述',
+   code                 varchar(50) comment '编码',
    status               varchar(20) comment '状态',
    createTime           datetime comment '创建时间',
    createUserId         bigint comment '创建人',

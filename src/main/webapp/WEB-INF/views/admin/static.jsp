@@ -22,6 +22,9 @@
 <link href="${pageContext.request.contextPath}/static/bootstrap-notify/css/styles/alert-bangtidy.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/static/bootstrap-notify/css/styles/alert-blackgloss.css" rel="stylesheet">
 
+<!--  ztree metroStyle -->
+<link href="${pageContext.request.contextPath}/static/zTree_v3/css/metroStyle/metroStyle.css" rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -58,3 +61,6 @@
 
 <!-- lypApp JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/lypApp.js"></script>
+
+<!-- Ztree JavaScript -->
+<script src="${pageContext.request.contextPath}/static/zTree_v3/js/jquery.ztree.all.js"></script>
