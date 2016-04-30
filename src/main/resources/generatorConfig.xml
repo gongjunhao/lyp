@@ -40,47 +40,10 @@
             <javaClientGenerator type="XMLMAPPER" targetPackage="${daoPackage}" targetProject="${targetProject}">
             </javaClientGenerator>
             <!-- table 举例 -->
-            <table tableName="Dictionary" domainObjectName="Dictionary" enableCountByExample="false"
+            <table tableName="InsuranceAttach" domainObjectName="InsuranceAttach" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
                 <property name="useActualColumnNames" value="true"/>
             </table>
-
-            <table tableName="Insurance" domainObjectName="Insurance" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
-            <table tableName="SystemResource" domainObjectName="SystemResource" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
-            <table tableName="SystemRoleResource" domainObjectName="SystemRoleResource" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
-            <table tableName="SystemUser" domainObjectName="SystemUser" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
-            <table tableName="SystemUserRole" domainObjectName="SystemUserRole" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
-            <table tableName="SystemRole" domainObjectName="SystemRole" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-                <property name="useActualColumnNames" value="true"/>
-            </table>
-
         </context>
     </generatorConfiguration>

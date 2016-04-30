@@ -252,10 +252,13 @@
           <a href="#"><i class="fa fa-credit-card fa-fw"></i>质保卡管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
-              <a href="${pageContext.request.contextPath}/admin/insurance/code">生成质保卡号</a>
+              <a href="${pageContext.request.contextPath}/admin/certificateCard/producePage">生成质保卡号</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/admin/insurance/list">质保卡激活</a>
+              <a href="${pageContext.request.contextPath}/admin/certificateCard/listPage">质保卡号管理</a>
+            </li>
+            <li>
+              <a href="${pageContext.request.contextPath}/admin/insurance/listPage">质保卡激活管理</a>
             </li>
           </ul>
         </li>

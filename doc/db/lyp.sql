@@ -28,10 +28,11 @@ drop table if exists systemRole;
 create table CertificateCard
 (
    id                   bigint not null auto_increment comment ' 主键',
-   code                 varchar(10) comment '授权码',
+   code                 varchar(20) comment '授权码',
    createTime           datetime comment '生成日期',
    createUserId         bigint comment '生成人',
    status               varchar(20) comment '状态',
+   mark                 varchar(200) comment '备注',
    primary key (id)
 );
 
@@ -67,6 +68,7 @@ create table Insurance
    card_num             varchar(20) comment '智保卡号',
    customerName         varchar(50) comment '顾客姓名',
    customerBirthday     date comment '顾客生日',
+   customerEmail        varchar(100) comment '顾客邮箱',
    mobileNumber         varchar(20) comment '手机号码',
    store                varchar(20) comment '门店',
    storeTransactor      varchar(50) comment '门店办理人',
@@ -77,6 +79,7 @@ create table Insurance
 );
 
 alter table Insurance comment '碎屏保险';
+
 
 /*==============================================================*/
 /* Table: InsuranceAttach                                       */
