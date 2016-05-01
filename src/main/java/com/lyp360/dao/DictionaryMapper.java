@@ -59,4 +59,6 @@ public interface DictionaryMapper {
     List<Dictionary> getChildNodes(@Param("parentId") Long parentId);
 
     List<Dictionary> selectDictionaryList(Dictionary dictionary);
+
+    Dictionary findDictByRoleCode(String code);
 }

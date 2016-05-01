@@ -117,8 +117,8 @@
                                                     <td class="center">{{u.status}}</td>
                                                     <td class="center">{{u.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                                     <td class="center">
-                                                        <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="upate(u)">修改</button>
-                                                        <button type="button" class="btn btn-outline btn-danger btn-xs" ng-click="delete(u)">删除</button>
+                                                        <button type="button" ng-disabled="{{u.id == 1}}" class="btn btn-outline btn-primary btn-xs" ng-click="upate(u)">修改</button>
+                                                        <button type="button" ng-disabled="{{u.id == 1}}" class="btn btn-outline btn-danger btn-xs" ng-click="delete(u)">删除</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -164,18 +164,20 @@
                         <label>父级:</label>
                         <input type="text" name="name" class="form-control" ng-model="parentNode.name" ng-readonly="true">
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': aform.code.$invalid && aform.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': aform.name.$invalid && (aform.name.$touched || aform.$submitted) }">
                         <label>名称:</label>
                         <input type="text"  name="name" ng-model="dictionary.name" class="form-control" required>
                         <div ng-show="aform.name.$touched || aform.$submitted"  class="help-block">
                             <div ng-show="aform.name.$error.required ">名称必填.</div>
                         </div>
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': aform.code.$invalid && aform.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': aform.code.$invalid && (aform.code.$touched || aform.$submitted) }">
                         <label>编码:</label>
-                        <input type="text"  name="code" ng-model="dictionary.code" class="form-control" required>
+                        <input type="text"  name="code" ng-model="dictionary.code" class="form-control" ng-readonly="{{dictionary.id != null}}"
+                               ng-remote-validate="${pageContext.request.contextPath}/admin/dictionary/validCode" required>
                         <div ng-show="aform.code.$touched || aform.$submitted"  class="help-block">
                             <div ng-show="aform.code.$error.required ">编码必填.</div>
+                            <div ng-show="aForm.code.$error.ngRemoteValidate">此编码已被占用</div>
                         </div>
                     </div>
                 </div>

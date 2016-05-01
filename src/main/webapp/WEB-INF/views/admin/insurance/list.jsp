@@ -130,6 +130,7 @@
                                                     <td class="center">{{insurance.customerName}}</td>
                                                     <td class="center">{{insurance.mobileNumber}}</td>
                                                     <td class="center">{{insurance.store}}</td>
+                                                    <td class="center">{{insurance.status}}</td>
                                                     <td class="center">{{insurance.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                                     <td class="center">
                                                         <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="upate(insurance)">编辑</button>

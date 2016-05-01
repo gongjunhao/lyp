@@ -27,6 +27,12 @@
     from dictionary
     where parentId = #{parentId,jdbcType=BIGINT} AND status != 'del'
   </select>
+  <select id="findDictByRoleCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from dictionary
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
   <select id="selectDictionaryList" resultMap="BaseResultMap" parameterType="com.lyp360.entity.Dictionary" >
     select
     <include refid="Base_Column_List" />

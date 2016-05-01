@@ -104,4 +104,27 @@ public class DictionaryController {
             e.printStackTrace();
         }
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/validCode", method = RequestMethod.POST)
+    public JSONObject validCode(@RequestBody String json) {
+        try {
+            log.debug(json);
+            String code = JSON.parseObject(json).getString("value");
+            Dictionary dict = dictionaryService.findDictByRoleCode(code);
+            JSONObject object = new JSONObject();
+            if(dict != null){
+                object.put("isValid", false);
+                object.put("value", code);
+            } else {
+                object.put("isValid", true);
+                object.put("value", code);
+            }
+            return object;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

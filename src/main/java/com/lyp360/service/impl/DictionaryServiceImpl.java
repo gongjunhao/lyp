@@ -57,4 +57,9 @@ public class DictionaryServiceImpl implements IDictionaryService {
     public List<Dictionary> selectDictionaryList(Dictionary dictionary) {
         return dictionaryDao.selectDictionaryList(dictionary);
     }
+
+    @Override
+    public Dictionary findDictByRoleCode(String code) {
+        return dictionaryDao.findDictByRoleCode(code);
+    }
 }

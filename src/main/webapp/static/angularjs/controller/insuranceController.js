@@ -10,15 +10,16 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
 
     //初始化表头
     $scope.tableHead = new Array();
-    $scope.tableHead.push({code:"id",                       name:"ID",            class:"sorting_asc", style:"width:40px;",     sort:"asc"});
-    $scope.tableHead.push({code:"certificateCode",        name:"激活码",      class:"sorting",     style:"width:100px;",    sort:""});
-    $scope.tableHead.push({code:"telBrand",                name:"品牌",      class:"sorting",     style:"width:100px;",    sort:""});
+    $scope.tableHead.push({code:"id",                       name:"#",            class:"sorting_asc", style:"width:30px;",     sort:"asc"});
+    $scope.tableHead.push({code:"certificateCode",        name:"激活码",      class:"sorting",     style:"width:60px;",    sort:""});
+    $scope.tableHead.push({code:"telBrand",                name:"品牌",      class:"sorting",     style:"width:50px;",    sort:""});
     $scope.tableHead.push({code:"telModel",                name:"型号",          class:"sorting",     style:"width:80px;",     sort:""});
-    $scope.tableHead.push({code:"telIMEI",                 name:"IMEI码",      class:"sorting",     style:"width:100px;",    sort:""});
-    $scope.tableHead.push({code:"customerName",           name:"顾客姓名",      class:"sorting",     style:"width:100px;",    sort:""});
-    $scope.tableHead.push({code:"mobileNumber",           name:"手机号码",      class:"sorting",     style:"width:100px;",    sort:""});
-    $scope.tableHead.push({code:"store",                   name:"门店",      class:"sorting",     style:"width:100px;",    sort:""});
-    $scope.tableHead.push({code:"createTime",             name:"申请时间",      class:"sorting",     style:"width:100px;",    sort:""});
+    $scope.tableHead.push({code:"telIMEI",                 name:"IMEI码",      class:"sorting",     style:"width:80px;",    sort:""});
+    $scope.tableHead.push({code:"customerName",           name:"姓名",      class:"sorting",     style:"width:50px;",    sort:""});
+    $scope.tableHead.push({code:"mobileNumber",           name:"手机号码",      class:"sorting",     style:"width:50px;",    sort:""});
+    $scope.tableHead.push({code:"store",                   name:"门店",      class:"sorting",     style:"width:70px;",    sort:""});
+    $scope.tableHead.push({code:"status",                  name:"状态",      class:"sorting",     style:"width:50px;",    sort:""});
+    $scope.tableHead.push({code:"createTime",             name:"申请时间",      class:"sorting",     style:"width:80px;",    sort:""});
     $scope.tableHead.push({code:"",                         name:"操作",          class:"",            style:"width:100px;",    sort:""});
 
     $scope.list = function () {
