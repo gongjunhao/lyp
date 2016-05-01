@@ -59,7 +59,7 @@ public class DictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    public Dictionary findDictByRoleCode(String code) {
-        return dictionaryDao.findDictByRoleCode(code);
+    public Dictionary findDictByCode(String code) {
+        return dictionaryDao.findDictByCode(code);
     }
 }

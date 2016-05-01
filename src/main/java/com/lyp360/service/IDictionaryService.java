@@ -18,5 +18,5 @@ public interface IDictionaryService {
     int updateByPrimaryKey(Dictionary record);
     List<Dictionary> getChildNodes(Long parentId);
     List<Dictionary> selectDictionaryList(Dictionary dictionary);
-    Dictionary findDictByRoleCode(String code);
+    Dictionary findDictByCode(String code);
 }

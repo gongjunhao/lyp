@@ -61,7 +61,7 @@ alter table Dictionary comment '数据字典';
 create table Insurance
 (
    id                   bigint not null auto_increment comment '主键',
-   certificateCode      varchar(10) comment '授权码',
+   certificateCode      varchar(20) comment '授权码',
    telBrand             varchar(20) comment '品牌',
    telModel             varchar(200) comment '型号',
    telIMEI              varchar(17) comment 'IMEI码',

@@ -60,5 +60,5 @@ public interface DictionaryMapper {
 
     List<Dictionary> selectDictionaryList(Dictionary dictionary);
 
-    Dictionary findDictByRoleCode(String code);
+    Dictionary findDictByCode(String code);
 }

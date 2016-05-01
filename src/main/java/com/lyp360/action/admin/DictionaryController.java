@@ -112,7 +112,7 @@ public class DictionaryController {
         try {
             log.debug(json);
             String code = JSON.parseObject(json).getString("value");
-            Dictionary dict = dictionaryService.findDictByRoleCode(code);
+            Dictionary dict = dictionaryService.findDictByCode(code);
             JSONObject object = new JSONObject();
             if(dict != null){
                 object.put("isValid", false);

@@ -16,4 +16,5 @@ public interface ICertificateCardService {
     int updateByPrimaryKeySelective(CertificateCard record);
     int updateByPrimaryKey(CertificateCard record);
     List<CertificateCard> selectCertificateCardList(CertificateCard card);
+    List<CertificateCard> findValidCard(CertificateCard card);
 }

@@ -52,4 +52,9 @@ public class CertficateCardServiceImpl implements ICertificateCardService {
     public List<CertificateCard> selectCertificateCardList(CertificateCard card) {
         return certificateCardDao.selectCertificateCardList(card);
     }
+
+    @Override
+    public List<CertificateCard> findValidCard(CertificateCard card) {
+        return certificateCardDao.findValidCard(card);
+    }
 }

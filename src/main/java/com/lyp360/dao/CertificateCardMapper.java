@@ -56,4 +56,6 @@ public interface CertificateCardMapper {
     int updateByPrimaryKey(CertificateCard record);
 
     List<CertificateCard> selectCertificateCardList(CertificateCard card);
+
+    List<CertificateCard> findValidCard(CertificateCard card);
 }
