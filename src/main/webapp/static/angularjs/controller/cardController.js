@@ -35,6 +35,18 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
         });
     };
     
+    $scope.doPrint = function () {
+        // console.log("1");
+        // var bdhtml=window.document.body.innerHTML;
+        // var sprnstr="<!--startprint-->";
+        // var eprnstr="<!--endprint-->";
+        // var prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);
+        // var prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+        // window.document.body.innerHTML=prnhtml;
+        window.print();
+        // window.document.body.innerHTML=bdhtml;
+    }
+    
     $scope.produce = function (vaild) {
         var data = {cardNum:$scope.cardNum, mark:$scope.mark};
         if(vaild){

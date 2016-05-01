@@ -44,12 +44,13 @@
                 </form>
                 <div class=".col-md-6 .col-md-offset-3" ng-show="hasProduce">
                     <p class="text-center">
-                        已成功生成{{cards.length}}个授权码
+                        已成功生成<strong>{{cards.length}}</strong>个授权码
+                        <button type="button" class="btn btn-primary btn-bg" ng-click="doPrint()">打印</button>&nbsp;
                         <button type="button" class="btn btn-primary btn-bg" ng-click="saveCards()">立即存库</button>
                     </p>
                 </div>
             </div>
-
+            <!--startprint-->
             <div class="col-sm-6 col-md-3" ng-repeat="card in cards">
                 <div class="thumbnail">
                     <img src="${pageContext.request.contextPath}/static/lyp/images/card.jpg" alt="质保卡">
@@ -61,7 +62,7 @@
                     </div>
                 </div>
             </div>
-
+            <!--endprint-->
             <div class='notifications bottom-right'></div>
             <!-- /.row -->
         </div>
