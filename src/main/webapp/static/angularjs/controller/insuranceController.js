@@ -38,6 +38,21 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
         });
     };
 
+    $scope.getDictMap = function () {
+        $http({
+            method: 'GET',
+            url: '/dicMap',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.dictMaps = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getDictMap();
 
     $scope.upate = function (insurance) {
         var modalInstance = $uibModal.open({
@@ -144,6 +159,26 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
 lypApp.controller('insuranceUpdateController', function ($scope,  $http, $uibModalInstance, insurance) {
 
     $scope.insurance = insurance;
+    
+    $scope.getAttaches = function () {
+        $http({
+            method: 'GET',
+            url: '/admin/insurance/getAttaches/'+insurance.id,
+            data: insurance
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.attaches = response.data.attaches;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    if(insurance != null && insurance.id != null) {
+        $scope.getAttaches();
+    }
+    
 
     $scope.save = function (vaild) {
         if(vaild){
@@ -182,4 +217,34 @@ lypApp.controller('insuranceUpdateController', function ($scope,  $http, $uibMod
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getDictMap = function () {
+        $http({
+            method: 'GET',
+            url: '/dicMap',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.dictMaps = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getTelStatus = function (brand) {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/status',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.statuses = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+    $scope.getTelStatus();
+    $scope.getDictMap();
 });

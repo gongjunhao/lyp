@@ -2,6 +2,7 @@ package com.lyp360.action.cms;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lyp360.bean.InsuranceBean;
 import com.lyp360.entity.CertificateCard;
 import com.lyp360.entity.Dictionary;
 import com.lyp360.entity.Insurance;
@@ -10,9 +11,9 @@ import com.lyp360.service.ICertificateCardService;
 import com.lyp360.service.IDictionaryService;
 import com.lyp360.service.IInsuranceAttachService;
 import com.lyp360.service.IInsuranceService;
+import com.lyp360.utils.Constant;
 import com.lyp360.utils.LypFileUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -127,6 +129,34 @@ public class CmsController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/card/query", method = RequestMethod.POST)
+    public JSONObject query(@RequestBody String card) {
+        JSONObject object = new JSONObject();
+        try{
+            Insurance insurance = JSON.parseObject(card, Insurance.class);
+            List<InsuranceBean>  beans = new ArrayList<>();
+            if(insurance != null && insurance.getCertificateCode() != null && insurance.getMobileNumber() != null){
+                List<Insurance> insurances = insuranceService.selectInsuranceList(insurance);
+                for(Insurance temp : insurances) {
+                    InsuranceBean bean = new InsuranceBean();
+                    bean.setInsurance(temp);
+                    List<InsuranceAttach> attaches = insuranceAttachService.selectAttachesByInsuranceId(temp.getId());
+                    for(InsuranceAttach attach: attaches){
+                        attach.setSavePath(Constant.resPath + attach.getSavePath().substring(attach.getSavePath().indexOf(":")+9));
+                    }
+                    bean.setAttachs(attaches);
+                    beans.add(bean);
+                }
+                object.put("insurances", beans);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 
 }

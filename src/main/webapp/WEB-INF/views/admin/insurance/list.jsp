@@ -124,13 +124,13 @@
                                                 <tr class="gradeA odd" insurance="row" ng-repeat="insurance in pager.list">
                                                     <td class="sorting_1">{{insurance.id}}</td>
                                                     <td>{{insurance.certificateCode}}</td>
-                                                    <td>{{insurance.telBrand}}</td>
-                                                    <td class="center">{{insurance.telModel}}</td>
+                                                    <td>{{dictMaps[insurance.telBrand]}}</td>
+                                                    <td class="center">{{dictMaps[insurance.telModel]}}</td>
                                                     <td class="center">{{insurance.telIMEI}}</td>
                                                     <td class="center">{{insurance.customerName}}</td>
                                                     <td class="center">{{insurance.mobileNumber}}</td>
-                                                    <td class="center">{{insurance.store}}</td>
-                                                    <td class="center">{{insurance.status}}</td>
+                                                    <td class="center">{{dictMaps[insurance.store]}}</td>
+                                                    <td class="center">{{dictMaps[insurance.status]}}</td>
                                                     <td class="center">{{insurance.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                                     <td class="center">
                                                         <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="upate(insurance)">编辑</button>
@@ -183,8 +183,56 @@
                         <input type="text"  name="certificateCode" ng-model="insurance.certificateCode" class="form-control" ng-disabled="true" ng-remote-validate="${pageContext.request.contextPath}/admin/insurance/validRoleCode" required>
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>品牌:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telBrand" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>型号:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telModel" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>IMEI码:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telIMEI" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>顾客姓名:</label>
                         <input type="text" name="customerName" class="form-control" ng-model="insurance.customerName" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>顾客邮箱:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.customerEmail" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>手机号码:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mobileNumber" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>门店:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.store" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>门店办理人:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.storeTransactor" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>创建时间:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.createTime" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>状态:</label>
+                        <select name="stauts" ng-options="status.code as status.name for status in statuses" ng-model="insurance.status">
+                            <option value="">--请选择--</option>
+                        </select>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>备注:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mark" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">照片</label>
+                        <div ng-repeat="file in attaches">
+                            <img ng-src="{{file.savePath}}" class="img-rounded">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

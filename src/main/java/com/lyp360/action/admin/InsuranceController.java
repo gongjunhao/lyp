@@ -5,7 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyp360.entity.Insurance;
+import com.lyp360.entity.InsuranceAttach;
+import com.lyp360.service.IInsuranceAttachService;
 import com.lyp360.service.IInsuranceService;
+import com.lyp360.utils.Constant;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,9 @@ public class InsuranceController {
     @Autowired
     private IInsuranceService insuranceService;
 
+    @Autowired
+    private IInsuranceAttachService attachService;
+
 
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
     public String listPage(HttpServletRequest request) {
@@ -51,6 +57,18 @@ public class InsuranceController {
         List<Insurance> list = insuranceService.selectInsuranceList(insurance);
         PageInfo page = new PageInfo(list);
         return page;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAttaches/{id}", method = RequestMethod.GET)
+    public JSONObject list(@PathVariable Long id) {
+        JSONObject object = new JSONObject();
+        List<InsuranceAttach> attaches = attachService.selectAttachesByInsuranceId(id);
+        for(InsuranceAttach attach: attaches){
+            attach.setSavePath(Constant.resPath + attach.getSavePath().substring(attach.getSavePath().indexOf(":")+9));
+        }
+        object.put("attaches", attaches);
+        return object;
     }
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

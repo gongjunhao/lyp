@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by junhao on 2016/4/24.
@@ -36,4 +38,15 @@ public class HomeController {
         return "/cms/index";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/dicMap", method = RequestMethod.GET)
+    public Object getChildNodes(){
+        Dictionary emptyDict = new Dictionary();
+        List<Dictionary> dicts = dictionaryService.selectDictionaryList(emptyDict);
+        Map<String, String> dictMap = new HashMap<>();
+        for(Dictionary dict : dicts) {
+            dictMap.put(dict.getCode(), dict.getName());
+        }
+        return dictMap;
+    }
 }

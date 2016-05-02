@@ -1,6 +1,7 @@
 lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
-    $scope.card = {};
 
+    $scope.card = {};
+    //激活
     $scope.activeCard = function (vaild) {
         if(vaild && $scope.files != null && $scope.files.length > 0){
             $scope.upload($scope.files, $scope.card);
@@ -19,6 +20,8 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
             console.log(resp);
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
             if(resp.status == 200){
+                $scope.card = {};
+                $scope.files = [];
                 alert("注册成功！");
             }
         }, function (resp) {
@@ -29,36 +32,32 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
         });
     };
 
+    //删除图片
     $scope.remove = function(item) {
         var index = $scope.files.indexOf(item);
         $scope.files.splice(index, 1);
-    }
+    };
 
-    $scope.produce = function (vaild) {
-        var data = {cardNum:$scope.cardNum, mark:$scope.mark};
+    //查询
+    $scope.query = function (vaild) {
         if(vaild){
-            if(isNaN($scope.cardNum)){
-                alert("请输入一个整数！");
-            } else {
-                $http({
-                    method: 'POST',
-                    url: '/admin/certificateCard/produce',
-                    data: data
-                }).then(function successCallback(response) {
-                    console.log(response);
-                    if(response.status == 200){
-                        $scope.hasProduce = true;
-                        $scope.cards = response.data.cards;
-                    }
-                }, function errorCallback(response) {
-                    console.log(response);
-                });
-            }
+            $http({
+                method: 'POST',
+                url: '/cms/card/query',
+                data:$scope.card
+            }).then(function successCallback(response) {
+                console.log(response);
+                if(response.status == 200){
+                    $scope.insurances = response.data.insurances;
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+            });
         } else {
-            alert("请完善表单！一次生成个数不得超过1000个");
+            alert("请修正表单");
         }
     };
-    
+
     $scope.getStores = function () {
         $http({
             method: 'GET',
@@ -101,7 +100,22 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
             console.log(response);
         });
     }
-    
+
+    $scope.getDictMap = function () {
+        $http({
+            method: 'GET',
+            url: '/dicMap',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.dictMaps = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getDictMap();
     $scope.pageInit = function () {
         $scope.getMobiles();
         $scope.getStores();
