@@ -5,18 +5,26 @@ import com.alibaba.fastjson.JSONObject;
 import com.lyp360.entity.CertificateCard;
 import com.lyp360.entity.Dictionary;
 import com.lyp360.entity.Insurance;
+import com.lyp360.entity.InsuranceAttach;
 import com.lyp360.service.ICertificateCardService;
 import com.lyp360.service.IDictionaryService;
+import com.lyp360.service.IInsuranceAttachService;
 import com.lyp360.service.IInsuranceService;
+import com.lyp360.utils.LypFileUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by junhao on 2016/4/24.
@@ -37,6 +45,9 @@ public class CmsController {
 
     @Autowired
     private IInsuranceService insuranceService;
+
+    @Autowired
+    private IInsuranceAttachService insuranceAttachService;
 
     @ResponseBody
     @RequestMapping(value = "/childNodes/{code}", method = RequestMethod.GET)
@@ -93,12 +104,28 @@ public class CmsController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     @RequestMapping(value = "/card/active", method = RequestMethod.POST)
-    public String cardActive(@RequestBody String card) {
+    public String cardActive(@RequestParam("file") List<MultipartFile> files, @RequestParam("card") String card) {
         log.debug(card);
-        Insurance insurance = JSON.parseObject(card, Insurance.class);
-        insurance.setStatus("0");
-        insurance.setCreateTime(new Date());
-        insuranceService.insert(insurance);
+        try {
+            Insurance insurance = JSON.parseObject(card, Insurance.class);
+            insurance.setStatus("0");
+            insurance.setCreateTime(new Date());
+            long insuranceId = insuranceService.insert(insurance);
+            for (MultipartFile file : files){
+                log.debug(file.getOriginalFilename());
+                InsuranceAttach attach = new InsuranceAttach();
+                String newName = UUID.randomUUID().toString().replaceAll("-", "");
+                String type = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                attach.setAttachName(newName + type);
+                attach.setAttachSize(String.valueOf(file.getSize()));
+                attach.setInsuranceId(insuranceId);
+                attach.setSavePath(LypFileUtils.getInstance().generatSavePath()+attach.getAttachName());
+                FileUtils.copyInputStreamToFile(file.getInputStream(), new File(LypFileUtils.getInstance().generatSavePath()+attach.getAttachName()));
+                insuranceAttachService.insert(attach);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 

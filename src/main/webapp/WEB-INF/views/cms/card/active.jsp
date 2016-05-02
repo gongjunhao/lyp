@@ -133,6 +133,21 @@
                         </div>
                     </div>
                 </div>
+                <div ng-class="{ 'form-group row':true, 'has-error': aform.$submitted && (files==null||files.length==0)}">
+                    <label for="storeTransactor" class="col-sm-2 control-label text-right">手机照片</label>
+                    <div class="col-sm-3">
+                        <div ng-repeat="file in files">
+                            <img ngf-src="file" class="img-rounded">
+                            <button type="button" class="close" aria-label="Close" ng-click="remove(file)"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="button addFile" ngf-select ng-model="files" ngf-multiple="true" name="files" ngf-pattern="'image/*'"
+                             ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="100" ngf-keep="true" ngf-max-files="5"
+                             ngf-resize="{width: 128, height: 128}"></div>
+                        <div ng-show="aform.$submitted"  class="help-block">
+                            <div ng-show="files==null||files.length==0">请上传手机照片</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">

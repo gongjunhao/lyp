@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IInsuranceService {
     int deleteByPrimaryKey(Long id);
-    int insert(Insurance record);
+    long insert(Insurance record);
     int insertSelective(Insurance record);
     Insurance selectByPrimaryKey(Long id);
     int updateByPrimaryKeySelective(Insurance record);

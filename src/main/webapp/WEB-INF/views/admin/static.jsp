@@ -50,6 +50,12 @@
 <!-- angular JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/angular.min1.5.5.js"></script>
 
+<!-- angular ng-file-upload-shim JavaScript -->
+<script src="${pageContext.request.contextPath}/static/angularjs-ngfileupload.12/ng-file-upload-shim.min.js"></script>
+
+<!-- angular ng-file-upload- JavaScript -->
+<script src="${pageContext.request.contextPath}/static/angularjs-ngfileupload.12/ng-file-upload-all.min.js"></script>
+
 <!-- ui-bootstrap-tpls JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/ui-bootstrap-tpls-1.3.2.min.js"></script>
 

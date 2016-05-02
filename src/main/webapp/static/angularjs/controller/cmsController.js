@@ -1,24 +1,38 @@
-lypApp.controller('cmsController', function ($scope, $http, $uibModal) {
+lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
     $scope.card = {};
 
     $scope.activeCard = function (vaild) {
-        if(vaild){
-            $http({
-                method: 'POST',
-                url: '/cms/card/active',
-                data: $scope.card
-            }).then(function successCallback(response) {
-                console.log(response);
-                if(response.status == 200){
-                    alert("注册成功！");
-                }
-            }, function errorCallback(response) {
-                console.log(response);
-            });
+        if(vaild && $scope.files != null && $scope.files.length > 0){
+            $scope.upload($scope.files, $scope.card);
         } else {
             alert("请修正表单");
         }
     };
+    // upload on files
+    $scope.upload = function (files, card) {
+        Upload.upload({
+            method: 'POST',
+            url: '/cms/card/active',
+            data: {file: files, 'card': Upload.json(card)},
+            arrayKey: ''
+        }).then(function (resp) {
+            console.log(resp);
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            if(resp.status == 200){
+                alert("注册成功！");
+            }
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    $scope.remove = function(item) {
+        var index = $scope.files.indexOf(item);
+        $scope.files.splice(index, 1);
+    }
 
     $scope.produce = function (vaild) {
         var data = {cardNum:$scope.cardNum, mark:$scope.mark};

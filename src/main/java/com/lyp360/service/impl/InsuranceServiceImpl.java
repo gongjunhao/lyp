@@ -24,8 +24,9 @@ public class InsuranceServiceImpl implements IInsuranceService {
     }
 
     @Override
-    public int insert(Insurance record) {
-        return insuranceDao.insert(record);
+    public long insert(Insurance record) {
+        int count = insuranceDao.insert(record);
+        return record.getId();
     }
 
     @Override
