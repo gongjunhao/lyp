@@ -23,6 +23,7 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
                 $scope.card = {};
                 $scope.files = [];
                 alert("注册成功！");
+                window.location.href = "/cms/card/query";
             }
         }, function (resp) {
             console.log('Error status: ' + resp.status);
@@ -101,6 +102,50 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
         });
     }
 
+    $scope.getProvinces = function () {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/province',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.provinces = response.data;
+                $scope.getCitys($scope.provinces[0].code);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getCitys = function (provinceCode) {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/'+provinceCode,
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.citys = response.data;
+                $scope.getProviders($scope.citys[0].code);
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getProviders = function (cityCode) {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/'+cityCode,
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.providers = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
     $scope.getDictMap = function () {
         $http({
             method: 'GET',
@@ -118,6 +163,7 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
     $scope.getDictMap();
     $scope.pageInit = function () {
         $scope.getMobiles();
+        $scope.getProvinces();
         $scope.getStores();
     }
 });

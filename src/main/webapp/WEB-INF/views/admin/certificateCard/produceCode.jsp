@@ -33,8 +33,8 @@
             <div class="row">
                 <form name="cardForm" class="form-inline" ng-submit="produce(cardForm.$valid)" novalidate ng-show="!hasProduce">
                     <div ng-class="{ 'form-group':true, 'has-error': cardForm.cardNum.$invalid && cardForm.$submitted }">
-                        <label for="exampleInputAmount">请输入生成个数</label>
-                        <input type="number" class="form-control" id="exampleInputAmount" name="cardNum" ng-model="cardNum" placeholder="整数" max="1000" required>
+                        <label for="exampleInputAmount">请输入生成规则</label>
+                        <input type="text" class="form-control" style="width: 250px" id="exampleInputAmount" name="cardNum" ng-model="cardNum" placeholder="20160508{00001-00100}" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail2">备注</label>

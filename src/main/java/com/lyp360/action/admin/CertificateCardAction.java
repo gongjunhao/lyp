@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -44,15 +45,21 @@ public class CertificateCardAction {
         JSONArray array = new JSONArray();
         JSONObject jsonObject = JSON.parseObject(cardStr);
         Date nowDate = new Date();
-        Integer cardNum = jsonObject.getInteger("cardNum");
+        String rule = jsonObject.getString("cardNum");
+        String between = rule.substring(rule.indexOf("{"), rule.indexOf("}")+1);
+        String[] split = between.replace("{", "").replace("}","").split("-");
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<split[0].length(); i++){
+            sb.append("0");
+        }
         String mark = jsonObject.getString("mark");
         SystemUser user = (SystemUser)request.getSession().getAttribute("user");
-        for (int i=0; i<cardNum; i++) {
+        for (int i=Integer.parseInt(split[0]); i<=Integer.parseInt(split[1]); i++) {
             CertificateCard card = new CertificateCard();
             card.setCreateTime(nowDate);
             card.setStatus("0");
             card.setCreateUserId(user.getId());
-            card.setCode(RandomStringUtils.randomAlphanumeric(12).toUpperCase());
+            card.setCode(rule.replace(between, new DecimalFormat(sb.toString()).format(i)));
             card.setMark(mark);
             array.add(card);
         }

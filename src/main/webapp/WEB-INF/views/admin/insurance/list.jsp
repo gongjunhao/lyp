@@ -207,6 +207,18 @@
                         <input type="text" name="customerName" class="form-control" ng-model="insurance.mobileNumber" ng-disabled="true" required>
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>省份:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.province" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>城市:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.city" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>供应商:</label>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.provider" ng-disabled="true" required>
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>门店:</label>
                         <input type="text" name="customerName" class="form-control" ng-model="insurance.store" ng-disabled="true" required>
                     </div>
@@ -220,7 +232,7 @@
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>状态:</label>
-                        <select name="stauts" ng-options="status.code as status.name for status in statuses" ng-model="insurance.status">
+                        <select name="stauts" ng-options="status.code as status.name for status in statuses" class="form-control" ng-model="insurance.status">
                             <option value="">--请选择--</option>
                         </select>
                     </div>
@@ -231,7 +243,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">照片</label>
                         <div ng-repeat="file in attaches">
-                            <img ng-src="{{file.savePath}}" class="img-rounded">
+                            <img ng-src="{{file.savePath}}" class="img-rounded" width="500px" height="250px">
                         </div>
                     </div>
                 </div>

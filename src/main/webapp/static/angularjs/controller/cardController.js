@@ -50,25 +50,19 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
     $scope.produce = function (vaild) {
         var data = {cardNum:$scope.cardNum, mark:$scope.mark};
         if(vaild){
-            if(isNaN($scope.cardNum)){
-                alert("请输入一个整数！");
-            } else {
-                $http({
-                    method: 'POST',
-                    url: '/admin/certificateCard/produce',
-                    data: data
-                }).then(function successCallback(response) {
-                    console.log(response);
-                    if(response.status == 200){
-                        $scope.hasProduce = true;
-                        $scope.cards = response.data.cards;
-                    }
-                }, function errorCallback(response) {
-                    console.log(response);
-                });
-            }
-        } else {
-            alert("请完善表单！一次生成个数不得超过1000个");
+            $http({
+                method: 'POST',
+                url: '/admin/certificateCard/produce',
+                data: data
+            }).then(function successCallback(response) {
+                console.log(response);
+                if(response.status == 200){
+                    $scope.hasProduce = true;
+                    $scope.cards = response.data.cards;
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+            });
         }
     };
     

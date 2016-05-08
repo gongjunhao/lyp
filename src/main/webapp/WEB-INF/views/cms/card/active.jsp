@@ -67,7 +67,7 @@
                             <option value="">--手机型号--</option>
                         </select>
                         <div ng-show="aform.telModel.$touched || aform.$submitted"  class="help-block">
-                            <div ng-show="aform.telModel.$error.required ">请选择手机品牌.</div>
+                            <div ng-show="aform.telModel.$error.required ">请选择手机型号.</div>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                                ng-model="card.telIMEI" ng-pattern="/^(?!.*(.)\1{5})[0-9A-Fa-f]{15}([0-9A-Fa-f]{2})?$/">
                         <div ng-show="aform.telIMEI.$touched || aform.$submitted"  class="help-block">
                             <div ng-show="aform.telIMEI.$error.required ">请填写IMEI码.</div>
-                            <div ng-show="aform.telIMEI.$invalid">激活码无效</div>
+                            <div ng-show="aform.telIMEI.$invalid">IMEI码无效</div>
                         </div>
                     </div>
                 </div>
@@ -112,6 +112,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div ng-class="{ 'form-group row':true, 'has-error': aform.store.$invalid && (aform.store.$touched || aform.$submitted) }">
+                    <label for="store" class="col-sm-2 control-label text-right">省份</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="province"  name="province"  required  ng-change="getCitys(card.province)"
+                                ng-options="province.code as province.name for province in provinces" ng-model="card.province" placeholder="--省份--" >
+                            <option value="">--省份--</option>
+                        </select>
+                        <div ng-show="aform.province.$touched || aform.$submitted"  class="help-block">
+                            <div ng-show="aform.province.$error.required ">请选择省份.</div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{ 'form-group row':true, 'has-error': aform.store.$invalid && (aform.store.$touched || aform.$submitted) }">
+                    <label for="store" class="col-sm-2 control-label text-right">城市</label>
+                    <div class="col-sm-3">
+                            <select class="form-control" id="city"  name="city"  required ng-change="getProviders(card.city)"
+                                    ng-options="city.code as city.name for city in citys" ng-model="card.city" placeholder="--城市--" >
+                                <option value="">--城市--</option>
+                            </select>
+                            <div ng-show="aform.city.$touched || aform.$submitted"  class="help-block">
+                            <div ng-show="aform.city.$error.required ">请选择城市.</div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{ 'form-group row':true, 'has-error': aform.store.$invalid && (aform.store.$touched || aform.$submitted) }">
+                    <label for="store" class="col-sm-2 control-label text-right">服务商</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="provider"  name="provider"  required
+                                ng-options="provider.code as provider.name for provider in providers" ng-model="card.provider" placeholder="--服务商--" >
+                            <option value="">--服务商--</option>
+                        </select>
+                        <div ng-show="aform.store.$touched || aform.$submitted"  class="help-block">
+                            <div ng-show="aform.store.$error.required ">请选择服务商.</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div ng-class="{ 'form-group row':true, 'has-error': aform.store.$invalid && (aform.store.$touched || aform.$submitted) }">
                     <label for="store" class="col-sm-2 control-label text-right">门店</label>
                     <div class="col-sm-3">
