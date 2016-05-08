@@ -10,6 +10,8 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
     $scope.orderBy = "id";
     $scope.sort = "asc";
 
+    $scope.item = {ids:[]};
+
     //初始化表头
     $scope.tableHead = new Array();
     $scope.tableHead.push({code:"id",           name:"ID",            class:"sorting_asc", style:"width:40px;",     sort:"asc"});
@@ -45,6 +47,42 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
         // window.document.body.innerHTML=prnhtml;
         window.print();
         // window.document.body.innerHTML=bdhtml;
+    }
+
+    $scope.checkAll = function() {
+        if($scope.item.ids.length > 0){
+            $scope.uncheckAll();
+        } else {
+            $scope.item.ids = [];
+            angular.forEach($scope.pager.list, function (card) {
+                $scope.item.ids.push(card.id);
+            })
+        }
+    };
+    $scope.uncheckAll = function() {
+        $scope.item.ids = [];
+    };
+    
+    $scope.delAll = function () {
+        if($scope.item.ids == null || $scope.item.ids.length ==0 ){
+            alert("请选择要删除的内容");
+        } else {
+            if(confirm("确定要删除吗？")) {
+                $http({
+                    method: 'POST',
+                    url: '/admin/certificateCard/delAll',
+                    data: $scope.item.ids
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.status == 200){
+                        $scope.list();
+                        alert("删除成功!");
+                    }
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+            }
+        }
     }
     
     $scope.produce = function (vaild) {

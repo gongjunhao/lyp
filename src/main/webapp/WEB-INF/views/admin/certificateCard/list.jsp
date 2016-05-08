@@ -74,6 +74,7 @@
                                             <div id="dataTables-3" class="dataTables_filter">
                                                 <button type="button" class="btn btn-info" ng-click="list()">查询</button>
                                                 <button type="button" class="btn btn-info" ng-click="card={}">清空</button>
+                                                <button type="button" class="btn btn-error" ng-click="delAll()">删除</button>
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +85,7 @@
                                                    aria-describedby="dataTables-example_info">
                                                 <thead>
                                                 <tr role="row">
+                                                    <th class="" style="width: 10px;"><input type="checkbox" ng-click="checkAll()" /></th>
                                                     <th class="{{head.class}}" tabindex={{$index}}" ng-repeat="head in tableHead"
                                                         aria-sort="{{head.code}}" ng-click="sortColumn(head)" style="{{head.style}}">{{head.name}}
                                                     </th>
@@ -91,6 +93,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr class="gradeA odd" role="row" ng-repeat="card in pager.list">
+                                                    <td><input type="checkbox" checklist-model="item.ids" checklist-value="card.id" /></td>
                                                     <td class="sorting_1">{{card.id}}</td>
                                                     <td>{{card.code}}</td>
                                                     <td>{{card.mark}}</td>

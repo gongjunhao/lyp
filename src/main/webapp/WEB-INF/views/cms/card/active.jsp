@@ -39,7 +39,7 @@
                     <label for="certificateCode" class="col-sm-2 control-label text-right">激活码</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="certificateCode" id="certificateCode" placeholder="激活码" ng-model="card.certificateCode"
-                               ng-remote-validate="${pageContext.request.contextPath}/cms/validCardCode" ng-minlength="12" required >
+                               ng-remote-validate="${pageContext.request.contextPath}/cms/validCardCode" ng-minlength="5" required >
                         <div ng-show="aform.certificateCode.$touched || aform.$submitted"  class="help-block">
                             <div ng-show="aform.certificateCode.$error.required ">请填写激活码.</div>
                             <div ng-show="aForm.certificateCode.$error.minlength">激活长度12位</div>

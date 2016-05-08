@@ -47,6 +47,9 @@
 <!-- bootstrap-notify JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/plugins/ngRemoteValidate.0.6.1.js"></script>
 
+<!-- checklist-model JavaScript -->
+<script src="${pageContext.request.contextPath}/static/angularjs/plugins/checklist-model.js"></script>
+
 <!-- lypApp JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/lypApp.js"></script>
 

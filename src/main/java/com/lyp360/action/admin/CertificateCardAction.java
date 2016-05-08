@@ -132,4 +132,20 @@ public class CertificateCardAction {
             e.printStackTrace();
         }
     }
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/delAll", method = RequestMethod.POST)
+    public void delAll(@RequestBody String idStr, HttpServletRequest request) {
+        try {
+            List<Long> ids = JSONArray.parseArray(idStr, Long.class);
+            CertificateCard card = new CertificateCard();
+            for(Long id : ids) {
+                card.setId(id);
+                card.setStatus("del");
+                cardService.updateByPrimaryKeySelective(card);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
