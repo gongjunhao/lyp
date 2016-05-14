@@ -42,18 +42,22 @@ lypApp.controller('cmsController', function ($scope, $http, $uibModal, Upload) {
     //查询
     $scope.query = function (vaild) {
         if(vaild){
-            $http({
-                method: 'POST',
-                url: '/cms/card/query',
-                data:$scope.card
-            }).then(function successCallback(response) {
-                console.log(response);
-                if(response.status == 200){
-                    $scope.insurances = response.data.insurances;
-                }
-            }, function errorCallback(response) {
-                console.log(response);
-            });
+            if(($scope.card.certificateCode != null && $scope.card.certificateCode != "") || ($scope.card.mobileNumber != null && $scope.card.mobileNumber != "") ){
+                $http({
+                    method: 'POST',
+                    url: '/cms/card/query',
+                    data:$scope.card
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.status == 200){
+                        $scope.insurances = response.data.insurances;
+                    }
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+            } else {
+                alert("至少输入1项");
+            }
         } else {
             alert("请修正表单");
         }

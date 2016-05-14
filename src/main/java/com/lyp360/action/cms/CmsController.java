@@ -88,9 +88,40 @@ public class CmsController {
         return null;
     }
 
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @RequestMapping(value = "/validApplyCode", method = RequestMethod.POST)
+    public JSONObject validApplyCode(@RequestBody String json) {
+        try {
+            log.debug(json);
+            String code = JSON.parseObject(json).getString("value");
+            Insurance insurance = new Insurance();
+            insurance.setCertificateCode(code);
+            List<Insurance> cards = insuranceService.selectInsuranceList(insurance);
+            JSONObject object = new JSONObject();
+            if(cards != null && cards.size() == 1){
+                object.put("isValid", true);
+                object.put("value", code);
+            } else {
+                object.put("isValid", false);
+                object.put("value", code);
+            }
+            return object;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @RequestMapping(value = "/card/active", method = RequestMethod.GET)
     public String activePage() {
         return "cms/card/active";
+    }
+
+    @RequestMapping(value = "/card/contactUs", method = RequestMethod.GET)
+    public String contactUs() {
+        return "cms/card/contactus";
     }
 
     @RequestMapping(value = "/card/query", method = RequestMethod.GET)
@@ -113,6 +144,13 @@ public class CmsController {
             insurance.setStatus("0");
             insurance.setCreateTime(new Date());
             long insuranceId = insuranceService.insert(insurance);
+            CertificateCard temp = new CertificateCard();
+            temp.setCode(insurance.getCertificateCode());
+            List<CertificateCard> validCard = cardService.findValidCard(temp);
+            for(CertificateCard vcard : validCard){
+                vcard.setStatus("toApply");
+                cardService.updateByPrimaryKey(vcard);
+            }
             for (MultipartFile file : files){
                 log.debug(file.getOriginalFilename());
                 InsuranceAttach attach = new InsuranceAttach();
@@ -139,7 +177,7 @@ public class CmsController {
         try{
             Insurance insurance = JSON.parseObject(card, Insurance.class);
             List<InsuranceBean>  beans = new ArrayList<>();
-            if(insurance != null && insurance.getCertificateCode() != null && insurance.getMobileNumber() != null){
+            if(insurance != null && (insurance.getCertificateCode() != null || insurance.getMobileNumber() != null)){
                 List<Insurance> insurances = insuranceService.selectInsuranceList(insurance);
                 for(Insurance temp : insurances) {
                     InsuranceBean bean = new InsuranceBean();

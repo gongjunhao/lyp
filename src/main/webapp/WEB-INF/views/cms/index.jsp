@@ -26,13 +26,13 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/active">激活</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/query">查询</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/agreement">协议</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/contactUs">联系我们</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/contactUs">联系我们</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="jumbotron">
-            <h2><strong>乐优品屏保协议</strong></h2>
+            <h2><strong>赤膜王防爆膜屏幕质保协议</strong></h2>
             <p class="lead">购买手机屏安保障服务时，您的手机屏幕应完好无损。
                 您在购买时应提供上表中所要求的信息，提供显示手机序列号或IMEI号的屏幕完好照片，并缴纳费用。
                 您所提供的信息资料 及照片应真实有效，否则恕我们不能为您提供服务，且不能退还您已缴纳的购买本手机屏安保障服务的费用。

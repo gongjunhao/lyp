@@ -52,7 +52,22 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
         });
     };
 
+    $scope.getCardStatus = function (brand) {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/status',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.statuses = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
     $scope.getDictMap();
+    $scope.getCardStatus();
 
     $scope.upate = function (insurance) {
         var modalInstance = $uibModal.open({
@@ -232,7 +247,7 @@ lypApp.controller('insuranceUpdateController', function ($scope,  $http, $uibMod
         });
     };
 
-    $scope.getTelStatus = function (brand) {
+    $scope.getCardStatus = function (brand) {
         $http({
             method: 'GET',
             url: '/cms/childNodes/status',
@@ -245,6 +260,6 @@ lypApp.controller('insuranceUpdateController', function ($scope,  $http, $uibMod
             console.log(response);
         });
     };
-    $scope.getTelStatus();
+    $scope.getCardStatus();
     $scope.getDictMap();
 });

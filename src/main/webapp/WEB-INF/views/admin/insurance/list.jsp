@@ -64,7 +64,7 @@
                                         <div class="col-sm-3">
                                             <div id="dataTables-4" class="dataTables_filter">
                                                 <label>
-                                                    品牌:
+                                                    型号:
                                                     <input type="text" class="form-control input-sm" placeholder="" ng-model="insurance.telModel" aria-controls="dataTables-example">
                                                 </label>
                                             </div>
@@ -97,7 +97,9 @@
                                             <div id="dataTables-2" class="dataTables_filter">
                                                 <label>
                                                     状态:
-                                                    <input type="text" class="form-control input-sm" placeholder="" ng-model="insurance.status" aria-controls="dataTables-example">
+                                                    <select name="stauts" ng-options="status.code as status.name for status in statuses" class="form-control" ng-model="insurance.status">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
                                                 </label>
                                             </div>
                                         </div>
@@ -178,67 +180,67 @@
             </div>
             <form name="insuranceForm" ng-submit="save(insuranceForm.$valid)" novalidate>
                 <div class="modal-body">
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceCode.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.certificateCode.$invalid && insuranceForm.$submitted }">
                         <label>激活码:</label>
-                        <input type="text"  name="certificateCode" ng-model="insurance.certificateCode" class="form-control" ng-disabled="true" ng-remote-validate="${pageContext.request.contextPath}/admin/insurance/validRoleCode" required>
+                        <input type="text"  name="certificateCode" ng-model="insurance.certificateCode" class="form-control" ng-disabled="true">
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>品牌:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telBrand" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telBrand" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>型号:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telModel" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telModel" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>IMEI码:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telIMEI" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.telIMEI" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>顾客姓名:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.customerName" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.customerName" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>顾客邮箱:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.customerEmail" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.customerEmail" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>手机号码:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mobileNumber" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mobileNumber" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>省份:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.province" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.province" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>城市:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.city" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.city" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>供应商:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.provider" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.provider" ng-disabled="true" >
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.customerName.$invalid && insuranceForm.$submitted }">
                         <label>门店:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.store" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.store" ng-disabled="true" >
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.customerName.$invalid && insuranceForm.$submitted }">
                         <label>门店办理人:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.storeTransactor" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.storeTransactor" ng-disabled="true" >
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.customerName.$invalid && insuranceForm.$submitted }">
                         <label>创建时间:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.createTime" ng-disabled="true" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.createTime" ng-disabled="true" >
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.stauts.$invalid && insuranceForm.$submitted }">
                         <label>状态:</label>
                         <select name="stauts" ng-options="status.code as status.name for status in statuses" class="form-control" ng-model="insurance.status">
                             <option value="">--请选择--</option>
                         </select>
                     </div>
-                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.customerName.$invalid && insuranceForm.$submitted }">
                         <label>备注:</label>
-                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mark" required>
+                        <input type="text" name="customerName" class="form-control" ng-model="insurance.mark" >
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">照片</label>

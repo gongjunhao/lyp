@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lyp360.entity.CertificateCard;
 import com.lyp360.entity.Insurance;
 import com.lyp360.entity.InsuranceAttach;
+import com.lyp360.service.ICertificateCardService;
 import com.lyp360.service.IInsuranceAttachService;
 import com.lyp360.service.IInsuranceService;
 import com.lyp360.utils.Constant;
@@ -31,6 +33,9 @@ public class InsuranceController {
 
     @Autowired
     private IInsuranceService insuranceService;
+
+    @Autowired
+    private ICertificateCardService cardService;
 
     @Autowired
     private IInsuranceAttachService attachService;
@@ -77,6 +82,23 @@ public class InsuranceController {
         try {
             Insurance insurance = JSON.parseObject(user, Insurance.class);
             if(insurance.getId() != null){
+                CertificateCard card = new CertificateCard();
+                card.setCode(insurance.getCertificateCode());
+                if(insurance.getStatus().equals("pass")){
+                    List<CertificateCard> validCard = cardService.selectCertificateCardList(card);
+                    for(CertificateCard temp : validCard){
+                        temp.setStatus("used");
+                        cardService.updateByPrimaryKey(temp);
+                    }
+                } else if (insurance.getStatus().equals("notPass")){
+                    List<CertificateCard> validCard = cardService.selectCertificateCardList(card);
+                    for(CertificateCard temp : validCard){
+                        temp.setStatus("new");
+                        cardService.updateByPrimaryKey(temp);
+                    }
+                } else if (insurance.getStatus().equals("del")){
+
+                }
                 insuranceService.updateByPrimaryKeySelective(insurance);
             } else {
                 insurance.setCreateTime(new Date());

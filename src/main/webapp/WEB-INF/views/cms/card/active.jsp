@@ -27,7 +27,7 @@
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/cms/card/active">激活</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/query">查询</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/agreement">协议</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/contactUs">联系我们</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/contactUs">联系我们</a></li>
             </ul>
         </nav>
     </div>

@@ -26,7 +26,7 @@
                 <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/active">激活</a></li>
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/cms/card/query">查询</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/agreement">协议</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/contactUs">联系我们</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/cms/card/contactUs">联系我们</a></li>
             </ul>
         </nav>
     </div>
@@ -37,10 +37,8 @@
                     <label for="certificateCode" class="col-sm-2 control-label text-right">激活码</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="certificateCode" id="certificateCode" placeholder="激活码" ng-model="card.certificateCode"
-                               ng-remote-validate="${pageContext.request.contextPath}/cms/validCardCode" ng-minlength="5" required >
+                               ng-remote-validate="${pageContext.request.contextPath}/cms/validApplyCode" ng-minlength="5" >
                         <div ng-show="aform.certificateCode.$touched || aform.$submitted"  class="help-block">
-                            <div ng-show="aform.certificateCode.$error.required ">请填写激活码.</div>
-                            <div ng-show="aForm.certificateCode.$error.minlength">激活长度12位</div>
                             <div ng-show="aform.certificateCode.$invalid">激活码无效</div>
                         </div>
                     </div>
@@ -48,10 +46,9 @@
                 <div  ng-class="{ 'form-group row':true, 'has-error': aform.mobileNumber.$invalid && (aform.mobileNumber.$touched || aform.$submitted) }">
                     <label for="mobileNumber" class="col-sm-2 control-label text-right">手机号码</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="手机号码" required ng-model="card.mobileNumber"
+                        <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="手机号码" ng-model="card.mobileNumber"
                                ng-pattern="/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/">
                         <div ng-show="aform.mobileNumber.$touched || aform.$submitted"  class="help-block">
-                            <div ng-show="aform.mobileNumber.$error.required ">请填写手机号码.</div>
                             <div ng-show="aform.mobileNumber.$invalid">手机号码无效</div>
                         </div>
                     </div>

@@ -8,5 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="footer" style="margin-top: 20px;">
     <p class="pull-right"><a href="${pageContext.request.contextPath}/login">后台管理</a></p>
-    <p>&copy; 2016 LYP Company, Inc.<a href="${pageContext.request.contextPath}/agreement"> 质保协议</a></p>
+    <p>&copy; 2016 LYP Company, Inc.<a href="${pageContext.request.contextPath}/cms/card/agreement"> 质保协议</a></p>
 </footer>

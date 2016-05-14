@@ -111,7 +111,7 @@ public class CertificateCardAction {
             } else {
                 dict.setCreateUserId(user.getId());
                 dict.setCreateTime(new Date());
-                dict.setStatus("0");
+                dict.setStatus("new");
                 cardService.insert(dict);
             }
         } catch (Exception e){
@@ -125,7 +125,7 @@ public class CertificateCardAction {
         try {
             CertificateCard dict = JSON.parseObject(card, CertificateCard.class);
             if(dict.getId() != null){
-                dict.setStatus("del");
+                dict.setStatus("cardDel");
                 cardService.updateByPrimaryKeySelective(dict);
             }
         } catch (Exception e){
@@ -141,7 +141,7 @@ public class CertificateCardAction {
             CertificateCard card = new CertificateCard();
             for(Long id : ids) {
                 card.setId(id);
-                card.setStatus("del");
+                card.setStatus("cardDel");
                 cardService.updateByPrimaryKeySelective(card);
             }
         } catch (Exception e){

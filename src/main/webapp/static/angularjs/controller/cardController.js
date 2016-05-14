@@ -36,6 +36,38 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
             console.log(response);
         });
     };
+
+    $scope.getDictMap = function () {
+        $http({
+            method: 'GET',
+            url: '/dicMap',
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.dictMaps = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getDictMap();
+
+    $scope.getCardStatus = function () {
+        $http({
+            method: 'GET',
+            url: '/cms/childNodes/cardStatus'
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.status == 200){
+                $scope.statuses = response.data;
+            }
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.getCardStatus();
     
     $scope.doPrint = function () {
         // console.log("1");

@@ -34,10 +34,8 @@
     select
     <include refid="Base_Column_List" />
     from CertificateCard
-    where status != 'del' and status =  0 and code =  #{code,jdbcType=VARCHAR}
+    where status = 'new' and code =  #{code,jdbcType=VARCHAR}
   </select>
-
-
 
   <select id="selectCertificateCardList" resultMap="BaseResultMap" parameterType="com.lyp360.entity.CertificateCard" >
     select

@@ -66,7 +66,9 @@
                                             <div id="dataTables-2" class="dataTables_filter">
                                                 <label>
                                                     状态:
-                                                    <input type="text" class="form-control input-sm" placeholder="" ng-model="card.status" aria-controls="dataTables-example">
+                                                    <select class="form-control" ng-model="card.status" ng-options="status.code as status.name for status in statuses">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
                                                 </label>
                                             </div>
                                         </div>
@@ -97,7 +99,7 @@
                                                     <td class="sorting_1">{{card.id}}</td>
                                                     <td>{{card.code}}</td>
                                                     <td>{{card.mark}}</td>
-                                                    <td class="center">{{card.status}}</td>
+                                                    <td class="center">{{dictMaps[card.status]}}</td>
                                                     <td class="center">{{card.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                                     <td class="center">
                                                         <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="upate(card)">编辑</button>
