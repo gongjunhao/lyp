@@ -26,7 +26,7 @@
     select
     <include refid="Base_Column_List" />
     from CertificateCard
-    where id = #{id,jdbcType=BIGINT} AND  status != 'del'
+    where id = #{id,jdbcType=BIGINT} AND  status != 'cardDel'
   </select>
 
 
@@ -41,7 +41,7 @@
     select
     <include refid="Base_Column_List" />
     from CertificateCard
-    where status != 'del'
+    where status != 'cardDel'
     <if test="id != null and id != ''" >
       and id = #{id,jdbcType=BIGINT}
     </if>

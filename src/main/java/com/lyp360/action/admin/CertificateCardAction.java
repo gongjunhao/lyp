@@ -57,7 +57,7 @@ public class CertificateCardAction {
         for (int i=Integer.parseInt(split[0]); i<=Integer.parseInt(split[1]); i++) {
             CertificateCard card = new CertificateCard();
             card.setCreateTime(nowDate);
-            card.setStatus("0");
+            card.setStatus("new");
             card.setCreateUserId(user.getId());
             card.setCode(rule.replace(between, new DecimalFormat(sb.toString()).format(i)));
             card.setMark(mark);
