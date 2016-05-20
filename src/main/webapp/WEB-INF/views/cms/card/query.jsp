@@ -122,7 +122,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">激活时间</label>
                     <div class="col-sm-3">
-                        <p class="form-control-static">{{insurance.insurance.createTime}}</p>
+                        <p class="form-control-static">{{insurance.insurance.createTime | longToDate | date:'yyyy-MM-dd HH:mm'}}</p>
                     </div>
                 </div>
                 <div class="form-group">
