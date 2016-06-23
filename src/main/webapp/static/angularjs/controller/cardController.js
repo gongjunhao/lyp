@@ -78,6 +78,7 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
         // var prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
         // window.document.body.innerHTML=prnhtml;
         window.print();
+        //$("#myPrintArea").printArea();
         // window.document.body.innerHTML=bdhtml;
     }
 
@@ -129,6 +130,9 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
                 if(response.status == 200){
                     $scope.hasProduce = true;
                     $scope.cards = response.data.cards;
+                    if(response.data.existCode != null && response.data.existCode != undefined && response.data.existCode != ""){
+                        alert(response.data.existCode+"\n已经存在");
+                    }
                 }
             }, function errorCallback(response) {
                 console.log(response);

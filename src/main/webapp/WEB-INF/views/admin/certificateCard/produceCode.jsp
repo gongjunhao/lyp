@@ -42,7 +42,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">立即生成</button>
                 </form>
-                <div class=".col-md-6 .col-md-offset-3" ng-show="hasProduce">
+                <div class="col-md-6 col-md-offset-3" ng-show="hasProduce">
                     <p class="text-center">
                         已成功生成<strong>{{cards.length}}</strong>个授权码
                         <button type="button" class="btn btn-primary btn-bg" ng-click="doPrint()">打印</button>&nbsp;
@@ -51,14 +51,13 @@
                 </div>
             </div>
             <!--startprint-->
-            <div class="col-sm-6 col-md-3" ng-repeat="card in cards">
-                <div class="thumbnail">
-                    <img src="${pageContext.request.contextPath}/static/lyp/images/card.jpg" alt="质保卡">
-                    <div class="caption">
-                        <h4>乐优品-质保卡</h4>
-                        <p>激活码：<strong>{{card.code}}</strong></p>
-                        <p>生成日期：<strong>{{card.createTime  | longToDate | date:'yyyy-MM-dd HH:mm'}}</strong></p>
-                        <footer ng-if="card.mark != null">备注：<strong>{{card.mark}}</strong></footer>
+            <div id="myPrintArea">
+                <div class="col-sm-3" ng-repeat="card in cards">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <p>赤膜王激活码：</p>
+                            <p>{{card.code}}</p>
+                        </div>
                     </div>
                 </div>
             </div>

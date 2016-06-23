@@ -114,7 +114,7 @@
                                         <div class="col-sm-6">
                                             <div class="dataTables_length pagination" id="dataTables-example_length">
                                                 <label>每页显示
-                                                    <select ng-model="pager.pageSize" ng-change="list()" class="form-control input-sm"  ng-options="m for m in [10, 25, 50, 100]"></select>
+                                                    <select ng-model="pager.pageSize" ng-change="list()" class="form-control input-sm"  ng-options="m for m in [10, 25, 50, 100, 1000, 2000]"></select>
                                                     条
                                                 </label>
                                             </div>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class CertificateCardAction {
     public Object produce(@RequestBody String cardStr, HttpServletRequest request){
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
+        List<String> existCode = new ArrayList<>();
         JSONObject jsonObject = JSON.parseObject(cardStr);
         Date nowDate = new Date();
         String rule = jsonObject.getString("cardNum");
@@ -55,15 +57,24 @@ public class CertificateCardAction {
         String mark = jsonObject.getString("mark");
         SystemUser user = (SystemUser)request.getSession().getAttribute("user");
         for (int i=Integer.parseInt(split[0]); i<=Integer.parseInt(split[1]); i++) {
-            CertificateCard card = new CertificateCard();
-            card.setCreateTime(nowDate);
-            card.setStatus("new");
-            card.setCreateUserId(user.getId());
-            card.setCode(rule.replace(between, new DecimalFormat(sb.toString()).format(i)));
-            card.setMark(mark);
-            array.add(card);
+            String code = rule.replace(between, new DecimalFormat(sb.toString()).format(i));
+            CertificateCard temp = new CertificateCard();
+            temp.setCode(code);
+            List<CertificateCard> cards = cardService.selectCertificateCardList(temp);
+            if(cards != null && cards.size() > 0) {
+                existCode.add(code);
+            } else {
+                CertificateCard card = new CertificateCard();
+                card.setCreateTime(nowDate);
+                card.setStatus("new");
+                card.setCreateUserId(user.getId());
+                card.setCode(code);
+                card.setMark(mark);
+                array.add(card);
+            }
         }
         obj.put("cards", array);
+        obj.put("existCode", existCode);
         return obj;
     }
 
