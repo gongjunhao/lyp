@@ -80,7 +80,9 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
         window.print();
         //$("#myPrintArea").printArea();
         // window.document.body.innerHTML=bdhtml;
-    }
+    };
+    
+
 
     $scope.checkAll = function() {
         if($scope.item.ids.length > 0){
@@ -138,6 +140,13 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
                 console.log(response);
             });
         }
+    };
+
+    //导出
+    $scope.exportExcel = function () {
+        var url = "/admin/certificateCard/exportExcel?time="+new Date().getTime();
+        var param = "&cardNum="+$scope.cardNum;
+        window.open(url+param);
     };
     
     $scope.saveCards = function () {

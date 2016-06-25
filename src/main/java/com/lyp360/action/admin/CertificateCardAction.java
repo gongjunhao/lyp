@@ -8,14 +8,20 @@ import com.github.pagehelper.PageInfo;
 import com.lyp360.entity.CertificateCard;
 import com.lyp360.entity.SystemUser;
 import com.lyp360.service.ICertificateCardService;
+import com.lyp360.utils.PoiUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,6 +82,52 @@ public class CertificateCardAction {
         obj.put("cards", array);
         obj.put("existCode", existCode);
         return obj;
+    }
+
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            String rule = request.getParameter("cardNum");
+            String between = rule.substring(rule.indexOf("{"), rule.indexOf("}")+1);
+            String[] split = between.replace("{", "").replace("}","").split("-");
+            StringBuilder sb = new StringBuilder();
+            List<String> codes = new ArrayList<>();
+            for (int i=0; i<split[0].length(); i++){
+                sb.append("0");
+            }
+            for (int i=Integer.parseInt(split[0]); i<=Integer.parseInt(split[1]); i++) {
+                String code = rule.replace(between, new DecimalFormat(sb.toString()).format(i));
+                CertificateCard temp = new CertificateCard();
+                temp.setCode(code);
+                List<CertificateCard> cards = cardService.selectCertificateCardList(temp);
+                if(cards != null && cards.size() > 0) {
+
+                } else {
+                    codes.add(code);
+                }
+            }
+            if(codes.size() > 0){
+                HSSFWorkbook workbook = PoiUtils.writeCodeToSheet(codes);
+                String fileName = new String(("激活码").getBytes(), "ISO8859_1");
+                response.setContentType("application/octet-stream");
+                response.setCharacterEncoding("UTF-8");
+                response.setHeader("Content-Disposition", "attachment; filename="+fileName+".xls");
+                workbook.write(out);
+                out.flush();
+                out.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out = null;
+        }
     }
 
     @ResponseBody

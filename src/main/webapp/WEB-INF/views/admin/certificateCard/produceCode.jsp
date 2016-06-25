@@ -46,6 +46,7 @@
                     <p class="text-center">
                         已成功生成<strong>{{cards.length}}</strong>个授权码
                         <button type="button" class="btn btn-primary btn-bg" ng-click="doPrint()">打印</button>&nbsp;
+                        <button type="button" class="btn btn-primary btn-bg" ng-click="exportExcel()">导出</button>&nbsp;
                         <button type="button" class="btn btn-primary btn-bg" ng-click="saveCards()">立即存库</button>
                     </p>
                 </div>
