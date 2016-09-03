@@ -209,6 +209,10 @@
                         <input type="text" name="customerName" class="form-control" ng-model="insurance.mobileNumber" ng-disabled="true" >
                     </div>
                     <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
+                        <label>身份证号:</label>
+                        <input type="text" name="idCardNo" class="form-control" ng-model="insurance.idCardNo" ng-disabled="true" >
+                    </div>
+                    <div ng-class="{ 'form-group':true, 'has-error': insuranceForm.insuranceName.$invalid && insuranceForm.$submitted }">
                         <label>省份:</label>
                         <input type="text" name="customerName" class="form-control" ng-model="insurance.province" ng-disabled="true" >
                     </div>

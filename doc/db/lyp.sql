@@ -70,6 +70,7 @@ create table Insurance
    customerBirthday     date comment '顾客生日',
    customerEmail        varchar(100) comment '顾客邮箱',
    mobileNumber         varchar(20) comment '手机号码',
+   idCardNo             varchar(20) comment '身份证号',
    store                varchar(20) comment '门店',
    storeTransactor      varchar(50) comment '门店办理人',
    createTime           datetime comment '创建时间',

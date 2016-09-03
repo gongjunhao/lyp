@@ -103,6 +103,16 @@
                         </div>
                     </div>
                 </div>
+                <div  ng-class="{ 'form-group row':true, 'has-error': aform.idCardNo.$invalid && (aform.idCardNo.$touched || aform.$submitted) }">
+                    <label for="idCardNo" class="col-sm-2 control-label text-right">身份证号</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="idCardNo" name="idCardNo" placeholder="可选项 身份证号码"  ng-model="card.idCardNo"
+                               ng-pattern="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/">
+                        <div ng-show="aform.idCardNo.$touched || aform.$submitted"  class="help-block">
+                            <div ng-show="aform.idCardNo.$invalid">身份证号无效</div>
+                        </div>
+                    </div>
+                </div>
                 <div ng-class="{ 'form-group row':true, 'has-error': aform.customerEmail.$invalid && (aform.customerEmail.$touched || aform.$submitted) }">
                     <label for="customerEmail" class="col-sm-2 control-label text-right">顾客邮箱</label>
                     <div class="col-sm-3">

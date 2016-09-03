@@ -102,6 +102,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">身份证号</label>
+                    <div class="col-sm-3">
+                        <p class="form-control-static">{{insurance.insurance.idCardNo}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">邮箱</label>
                     <div class="col-sm-3">
                         <p class="form-control-static">{{insurance.insurance.customerEmail}}</p>
