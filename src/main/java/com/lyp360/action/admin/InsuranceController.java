@@ -5,21 +5,30 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyp360.entity.CertificateCard;
+import com.lyp360.entity.Dictionary;
 import com.lyp360.entity.Insurance;
 import com.lyp360.entity.InsuranceAttach;
 import com.lyp360.service.ICertificateCardService;
+import com.lyp360.service.IDictionaryService;
 import com.lyp360.service.IInsuranceAttachService;
 import com.lyp360.service.IInsuranceService;
 import com.lyp360.utils.Constant;
+import com.lyp360.utils.PoiUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * Created by GongJunhao on 2016/4/27.
@@ -39,6 +48,9 @@ public class InsuranceController {
 
     @Autowired
     private IInsuranceAttachService attachService;
+
+    @Autowired
+    private IDictionaryService dictionaryService;
 
 
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
@@ -62,6 +74,50 @@ public class InsuranceController {
         List<Insurance> list = insuranceService.selectInsuranceList(insurance);
         PageInfo page = new PageInfo(list);
         return page;
+    }
+
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
+        ServletOutputStream out = null;
+        try {
+            List<Dictionary> dictionaries = dictionaryService.selectDictionaryList(null);
+            Map<String, String> dicMap = new HashMap<>();
+            for(Dictionary dic : dictionaries){
+                dicMap.put(dic.getCode(), dic.getName());
+            }
+            out = response.getOutputStream();
+            String startTime = request.getParameter("startTime");
+            String endTime = request.getParameter("endTime");
+            String json = request.getParameter("insurance");
+            Insurance insurance = JSON.parseObject(json, Insurance.class);
+            Date startDate = null;
+            Date endDate = null;
+            String[] patterns = {"yyyy-MM-dd HH:mm:ss"};
+            if(StringUtils.isNotBlank(startTime) && !"undefined".equals(startTime))
+                startDate = DateUtils.parseDate(startTime, patterns);
+            if(StringUtils.isNotBlank(endTime) && !"undefined".equals(endTime))
+                endDate = DateUtils.parseDate(endTime, patterns);
+            List<Insurance> list = insuranceService.selectInsuranceListByTime(insurance, startDate, endDate);
+            if(list != null && list.size() > 0 ){
+                HSSFWorkbook workbook = PoiUtils.writeInstanceToSheet(list, dicMap);
+                String fileName = new String(("注册激活表").getBytes(), "ISO8859_1");
+                response.setContentType("application/octet-stream");
+                response.setCharacterEncoding("UTF-8");
+                response.setHeader("Content-Disposition", "attachment; filename="+fileName+".xls");
+                workbook.write(out);
+                out.flush();
+                out.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out = null;
+        }
     }
 
     @ResponseBody

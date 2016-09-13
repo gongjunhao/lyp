@@ -93,6 +93,67 @@
       and idCardNo like CONCAT('%',#{idCardNo},'%')
     </if>
   </select>
+
+
+  <select id="selectInsuranceListByTime" parameterType="com.lyp360.entity.Insurance" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from Insurance
+    where status != 'del'
+    <if test="id != null and id != ''">
+      and id = #{id,jdbcType=BIGINT}
+    </if>
+    <if test="certificateCode != null and certificateCode != ''">
+      and certificateCode = #{certificateCode,jdbcType=VARCHAR}
+    </if>
+    <if test="telBrand != null and telBrand != ''">
+      and telBrand = #{telBrand,jdbcType=VARCHAR}
+    </if>
+    <if test="telModel != null and telModel != ''">
+      and telModel = #{telModel,jdbcType=VARCHAR}
+    </if>
+    <if test="telIMEI != null and telIMEI != ''">
+      and telIMEI = #{telIMEI,jdbcType=VARCHAR}
+    </if>
+    <if test="card_num != null and card_num != ''">
+      and card_num = #{card_num,jdbcType=VARCHAR}
+    </if>
+    <if test="customerName != null and customerName != ''">
+      and customerName like CONCAT('%',#{customerName},'%')
+    </if>
+    <if test="customerEmail != null and customerEmail != ''">
+      and customerEmail like CONCAT('%',#{customerEmail},'%')
+    </if>
+    <if test="mobileNumber != null and mobileNumber != ''">
+      and mobileNumber like CONCAT('%',#{mobileNumber},'%')
+    </if>
+    <if test="store != null and store != ''">
+      and store = #{store,jdbcType=VARCHAR}
+    </if>
+    <if test="storeTransactor != null and storeTransactor != ''">
+      and storeTransactor like CONCAT('%',#{storeTransactor},'%')
+    </if>
+    <if test="createTime != null and createTime != ''">
+      and createTime = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null and status != ''">
+      and status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="mark != null and mark != ''">
+      and mark like CONCAT('%',#{mark},'%')
+    </if>
+    <if test="idCardNo != null and idCardNo != ''">
+      and idCardNo like CONCAT('%',#{idCardNo},'%')
+    </if>
+    <if test="startTime != null">
+        <![CDATA[ AND createTime >= #{startTime,jdbcType=TIMESTAMP} ]]>
+    </if>
+    <if test="endTime != null">
+        <![CDATA[ AND createTime <= #{endTime,jdbcType=TIMESTAMP} ]]>
+    </if>
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
       WARNING - @mbggenerated

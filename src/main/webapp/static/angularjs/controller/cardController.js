@@ -8,13 +8,13 @@ lypApp.controller('cardController', function ($scope, $http, $uibModal) {
         pageSize:10,
     };
     $scope.orderBy = "id";
-    $scope.sort = "asc";
+    $scope.sort = "desc";
 
     $scope.item = {ids:[]};
 
     //初始化表头
     $scope.tableHead = new Array();
-    $scope.tableHead.push({code:"id",           name:"ID",            class:"sorting_asc", style:"width:40px;",     sort:"asc"});
+    $scope.tableHead.push({code:"id",           name:"ID",            class:"sorting_asc", style:"width:40px;",     sort:"desc"});
     $scope.tableHead.push({code:"code",         name:"激活码",        class:"sorting",     style:"width:100px;",    sort:""});
     $scope.tableHead.push({code:"mark",         name:"备注",          class:"sorting",     style:"width:100px;",    sort:""});
     $scope.tableHead.push({code:"status",       name:"状态",          class:"sorting",     style:"width:80px;",     sort:""});

@@ -24,6 +24,8 @@
 
 <!--  ztree metroStyle -->
 <link href="${pageContext.request.contextPath}/static/zTree_v3/css/metroStyle/metroStyle.css" rel="stylesheet">
+<!--  ztree metroStyle -->
+<link href="${pageContext.request.contextPath}/static/angularjs/plugins/css/angularjs-datetime-picker.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,6 +66,9 @@
 
 <!-- bootstrap-notify JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/plugins/ngRemoteValidate.0.6.1.js"></script>
+
+<!-- bootstrap-notify JavaScript -->
+<script src="${pageContext.request.contextPath}/static/angularjs/plugins/angularjs-datetime-picker.js"></script>
 
 <!-- checklist-model JavaScript -->
 <script src="${pageContext.request.contextPath}/static/angularjs/plugins/checklist-model.js"></script>

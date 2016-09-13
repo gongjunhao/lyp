@@ -6,11 +6,11 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
         pageSize:10,
     };
     $scope.orderBy = "id";
-    $scope.sort = "asc";
+    $scope.sort = "desc";
 
     //初始化表头
     $scope.tableHead = new Array();
-    $scope.tableHead.push({code:"id",                       name:"#",            class:"sorting_asc", style:"width:30px;",     sort:"asc"});
+    $scope.tableHead.push({code:"id",                       name:"#",            class:"sorting_asc", style:"width:30px;",     sort:"desc"});
     $scope.tableHead.push({code:"certificateCode",        name:"激活码",      class:"sorting",     style:"width:60px;",    sort:""});
     $scope.tableHead.push({code:"telBrand",                name:"品牌",      class:"sorting",     style:"width:50px;",    sort:""});
     $scope.tableHead.push({code:"telModel",                name:"型号",          class:"sorting",     style:"width:80px;",     sort:""});
@@ -135,6 +135,29 @@ lypApp.controller('insuranceController', function ($scope, $http, $uibModal) {
         });
     };
 
+    //导出提示弹框
+    $scope.exportDialog = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'exportDialog.html',
+            controller: 'insuranceUpdateController',
+            size: "sm",
+            resolve: { insurance: $scope.insurance }
+        });
+        //弹窗更新完毕后，刷新列表
+        modalInstance.result.then(function (data) {
+            //$scope.selected = selectedItem;
+            console.log(data);
+            $scope.list();
+            $('.bottom-right').notify({
+                type:'info',
+                message: { text: '导出成功!' }
+            }).show();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
     //表头排序
     $scope.sortColumn = function(head) {
         if(head.code != ""){
@@ -212,6 +235,13 @@ lypApp.controller('insuranceUpdateController', function ($scope,  $http, $uibMod
         } else {
             alert("请修正表单后，再提交");
         }
+    };
+
+    $scope.realExport = function () {
+        var url = "/admin/insurance/exportExcel?time="+new Date().getTime();
+        var param = "&insurance="+JSON.stringify($scope.insurance)+"&startTime="+$scope.startTime + "&endTime="+$scope.endTime;
+        window.open(url+param);
+        $uibModalInstance.close("导出成功");
     };
 
     $scope.updateDel = function () {

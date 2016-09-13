@@ -6,6 +6,7 @@ import com.lyp360.service.IInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,5 +53,12 @@ public class InsuranceServiceImpl implements IInsuranceService {
     @Override
     public List<Insurance> selectInsuranceList(Insurance record) {
         return insuranceDao.selectInsuranceList(record);
+    }
+
+    @Override
+    public List<Insurance> selectInsuranceListByTime(Insurance insurance, Date startDate, Date endDate) {
+        insurance.setStartTime(startDate);
+        insurance.setEndTime(endDate);
+        return insuranceDao.selectInsuranceListByTime(insurance);
     }
 }

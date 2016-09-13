@@ -2,6 +2,7 @@ package com.lyp360.service;
 
 import com.lyp360.entity.Insurance;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface IInsuranceService {
     int updateByPrimaryKeySelective(Insurance record);
     int updateByPrimaryKey(Insurance record);
     List<Insurance> selectInsuranceList(Insurance record);
+    List<Insurance> selectInsuranceListByTime(Insurance insurance, Date startDate, Date endDate);
 }

@@ -107,6 +107,7 @@
                                             <div id="dataTables-3" class="dataTables_filter">
                                                 <button type="button" class="btn btn-info" ng-click="list()">查询</button>
                                                 <button type="button" class="btn btn-info" ng-click="insurance={}">清空</button>
+                                                <button type="button" class="btn btn-info" ng-click="exportDialog()">导出</button>
                                             </div>
                                         </div>
                                     </div>
@@ -273,6 +274,27 @@
                     <button class="btn btn-primary" type="button" ng-click="updateDel()">确认</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
                 </div>
+            </form>
+        </script>
+
+        <script type="text/ng-template" id="exportDialog.html">
+            <div class="modal-header">
+                <h3 class="modal-title">导出选择</h3>
+            </div>
+            <div class="modal-body">
+                <div ng-class="{ 'form-group':true}">
+                    <label>开始时间:</label>
+                    <input type="text" datetime-picker date-format="yyyy-MM-dd HH:mm:ss"  name="startTime" class="form-control" ng-model="startTime" >
+                </div>
+                <div ng-class="{ 'form-group':true}">
+                    <label>结束时间:</label>
+                    <input type="text" datetime-picker date-format="yyyy-MM-dd HH:mm:ss"  name="endTime" class="form-control" ng-model="endTime" >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="realExport()">导出</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+            </div>
             </form>
         </script>
     </div>

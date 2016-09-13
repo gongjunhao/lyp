@@ -56,4 +56,6 @@ public interface InsuranceMapper {
     int updateByPrimaryKey(Insurance record);
 
     List<Insurance> selectInsuranceList(Insurance record);
+
+    List<Insurance> selectInsuranceListByTime(Insurance record);
 }

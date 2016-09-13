@@ -1,4 +1,4 @@
-var lypApp = angular.module('lypApp', ['ui.bootstrap', 'remoteValidation', 'ngFileUpload', 'checklist-model']);
+var lypApp = angular.module('lypApp', ['ui.bootstrap', 'remoteValidation', 'ngFileUpload', 'checklist-model', 'angularjs-datetime-picker']);
 
 /**
  * 日期时间长整型（毫秒数）转换为日期（Date）
